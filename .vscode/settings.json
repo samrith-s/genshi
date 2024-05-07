@@ -2,12 +2,13 @@
   "editor.formatOnPaste": false,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll": true
+    "source.fixAll": "explicit"
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
   "files.exclude": {
     "**/.rollup.cache": true,
-    // "**/.yarn": true,
+    "**/.yarn": true,
     "**/.pnp.*": true
   },
   "search.exclude": {

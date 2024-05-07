@@ -1,23 +1,24 @@
-import { HaliStore } from "./Store";
+import { Store } from "./Store";
 
-const store = new HaliStore({
+/**
+ * Example
+ */
+const store = new Store({
   count: 0,
 });
 
-const increment = store.action<number>("increment");
+const increment = store.action<number>("increment", ({ state, payload }) => ({
+  count: state.count + payload,
+}));
 
-store.case(increment, async ({ state, payload, setState }) => {
-  setState({ count: payload + state.count });
+const plusMinus = store.action<boolean>("plus-minus", ({ state, payload }) => ({
+  count: state.count + (payload ? 1 : -1),
+}));
+
+const get = store.effect("data", ({ dispatch }) => {
+  dispatch(plusMinus, Math.random() > 0.5);
 });
 
-increment(10);
+store.dispatch(get);
 
-const effect = store.effect("get data", () => {
-  setTimeout(() => {
-    increment(10);
-  }, 100);
-});
-
-effect();
-
-store.getExecutions();
+store.dispatch(increment, 10);

@@ -2,5 +2,6 @@ node_modules/
 
 .rollup.cache
 .yarn/cache
+.yarn/install-state.gz
 
 lib/
