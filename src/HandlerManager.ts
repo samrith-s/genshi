@@ -44,9 +44,7 @@ export abstract class HandlerManager<State> extends StateManager<State> {
       }
 
       default: {
-        throw new Error(
-          `No ${type} dispatcher named '${name}' registered with store.`
-        );
+        throw new TypeError(`Type '${type}' is not a valid dispatcher.`);
       }
     }
   }
