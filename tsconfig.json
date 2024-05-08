@@ -17,6 +17,7 @@
     "declaration": true,
     "outDir": "lib",
     "declarationDir": "lib/types",
+    // "emitDeclarationOnly": true,
     "moduleResolution": "node",
     "target": "ESNext",
     "jsx": "react"
