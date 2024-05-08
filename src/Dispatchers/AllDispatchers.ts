@@ -14,12 +14,14 @@ export type ActionHandler<State, Payload> = ({
 }: {
   state: State;
   payload: Payload;
-}) => Partial<State>;
+}) => State;
 
 export class Action<State, Payload> extends BaseDispatcher<
   Dispatcher.ACTION,
   Payload
 > {
+  public parent: BaseDispatcher<Dispatcher, any> | null = null;
+
   public readonly handler: ActionHandler<State, Payload>;
 
   constructor(name: string, handler: ActionHandler<State, Payload>) {
@@ -28,7 +30,11 @@ export class Action<State, Payload> extends BaseDispatcher<
       type: Dispatcher.ACTION,
     });
 
-    this.handler = handler;
+    this.handler = (...args) => {
+      const data = handler(...args);
+      this.parent = null;
+      return data;
+    };
   }
 }
 
@@ -53,6 +59,8 @@ export class Effect<State, Payload> extends BaseDispatcher<
   Dispatcher.EFFECT,
   Payload
 > {
+  public parent: BaseDispatcher<Dispatcher, any> | null = null;
+
   public readonly handler: EffectHandler<State, Payload>;
 
   constructor(name: string, handler: EffectHandler<State, Payload>) {
@@ -61,6 +69,9 @@ export class Effect<State, Payload> extends BaseDispatcher<
       type: Dispatcher.EFFECT,
     });
 
-    this.handler = handler;
+    this.handler = (...args) => {
+      handler(...args);
+      this.parent = null;
+    };
   }
 }

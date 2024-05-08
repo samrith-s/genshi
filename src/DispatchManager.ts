@@ -11,7 +11,7 @@ export class DispatchManager<State> extends HistoryManager<State> {
     super(state);
   }
 
-  #dispatchInternal: Dispatch<State> = (...args) => {
+  public dispatch: Dispatch<State> = (...args) => {
     const dispatcher = args[0];
     const payload = args[1];
     const type = dispatcher.type;
@@ -25,6 +25,23 @@ export class DispatchManager<State> extends HistoryManager<State> {
       );
     }
 
+    const isGlobal = !dispatcher.parent;
+
+    const trace = this.trace({
+      global: isGlobal,
+      name,
+      type,
+      payload,
+      ...(!isGlobal
+        ? {
+            source: {
+              name: dispatcher.parent?.displayName,
+              type: dispatcher.parent?.type,
+            },
+          }
+        : {}),
+    });
+
     switch (type) {
       case Dispatcher.ACTION: {
         const actionHandler = handler as ActionHandler<State, typeof payload>;
@@ -35,52 +52,31 @@ export class DispatchManager<State> extends HistoryManager<State> {
             payload,
           })
         );
+
+        this.traceEnd(trace);
+
+        break;
       }
 
       case Dispatcher.EFFECT: {
         const effectHandler = handler as EffectHandler<State, typeof payload>;
+
+        this.traceEnd(trace);
 
         effectHandler({
           state: this.state,
           payload,
           dispatch: (...argv) => {
             const d = argv[0];
-            const p = argv[1];
-            const t = d.type;
-            const n = d.displayName;
+            d.parent = dispatcher;
 
-            this.#dispatchInternal(...argv);
-
-            this.record({
-              name: n,
-              type: t,
-              payload: p,
-              global: false,
-              source: {
-                name,
-                type,
-              },
-            });
+            this.dispatch(...argv);
           },
           getState: this.getState,
         });
+
+        break;
       }
     }
-  };
-
-  public dispatch: Dispatch<State> = (...args) => {
-    const dispatcher = args[0];
-    const payload = args[1];
-    const type = dispatcher.type;
-    const name = dispatcher.displayName;
-
-    this.record({
-      name,
-      type,
-      payload,
-      global: true,
-    });
-
-    this.#dispatchInternal(...args);
   };
 }

@@ -9,8 +9,8 @@ export type History<State> = {
   payload: unknown;
   global?: boolean;
   source?: {
-    name: string;
-    type: Dispatcher;
+    name?: string;
+    type?: Dispatcher;
   };
 };
 
@@ -19,20 +19,55 @@ export abstract class HistoryManager<State> extends HandlerManager<State> {
     super(state);
   }
 
-  #history: History<State>[] = [];
+  #history: Map<symbol, History<State>> = new Map();
 
-  protected record(
+  protected trace(
     history: Omit<History<State>, "previousState" | "currentState">
   ) {
-    this.#history.push({
+    const symbol = Symbol("trace");
+
+    this.#history.set(symbol, {
       global: false,
       ...history,
-      previousState: this.previousState as State,
-      currentState: this.state as State,
-    });
+    } as History<State>);
+
+    return symbol;
+  }
+
+  protected traceEnd(symbol: symbol) {
+    const trace = this.#history.get(symbol);
+
+    if (trace) {
+      const updatedTrace = {
+        ...trace,
+        previousState: this.previousState,
+        currentState: this.state as State,
+      };
+
+      this.#history.set(symbol, updatedTrace);
+    }
   }
 
   public history() {
-    return this.#history.slice();
+    return [...this.#history.values()];
+  }
+
+  public printHistory() {
+    console.table(
+      this.history().map((history) => ({
+        type: history.type,
+        dispatcher: history.name,
+        global: history.global,
+        payload: history.payload,
+        previous_state: history.previousState,
+        current_state: history.currentState,
+        ...(history.source
+          ? {
+              source_type: history.source?.type,
+              source_name: history.source?.name,
+            }
+          : {}),
+      }))
+    );
   }
 }
