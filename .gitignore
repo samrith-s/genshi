@@ -5,3 +5,5 @@ node_modules/
 .yarn/install-state.gz
 
 lib/
+
+.test/
