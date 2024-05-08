@@ -16,7 +16,10 @@ export default defineConfig({
     minify: false,
     reportCompressedSize: true,
     terserOptions: {
-      compress: true,
+      compress: false,
+      mangle: false,
+      keep_classnames: true,
+      format: true,
     },
     lib: {
       name: "Hali",

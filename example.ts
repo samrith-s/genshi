@@ -1,4 +1,4 @@
-import { Store } from "./Store";
+import { Store } from "./src/Store";
 
 /**
  * Example

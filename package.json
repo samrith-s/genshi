@@ -1,14 +1,19 @@
 {
   "name": "hali",
-  "author": "Samrith Shankar <samrith.shankar@outlook.com>",
   "version": "0.0.0",
+  "description": "A simple and lightweight state management library for React Native",
+  "author": "Samrith Shankar <samrith.shankar@outlook.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/samrith-s/hali#readme",
   "type": "module",
+  "source": "src/index.ts",
   "module": "lib/index.js",
   "main": "lib/index.cjs",
   "types": "lib/types/src/index.d.ts",
-  "description": "A simple and lightweight state management library for React Native",
-  "license": "MIT",
-  "homepage": "https://github.com/samrith-s/hali#readme",
+  "exports": {
+    "import": "./lib/index.js",
+    "require": "./lib/index.cjs"
+  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/samrith-s/hali.git"
@@ -16,10 +21,15 @@
   "bugs": {
     "url": "https://github.com/samrith-s/hali/issues"
   },
+  "files": [
+    "lib",
+    "src"
+  ],
   "scripts": {
     "build": "vite build",
     "lint": "eslint --cache --fix .",
-    "test": "vitest"
+    "test": "vitest --coverage",
+    "example": "vite-node example.ts"
   },
   "devDependencies": {
     "@types/node": "^20.12.11",
