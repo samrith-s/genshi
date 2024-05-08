@@ -14,7 +14,7 @@ export type ActionHandler<State, Payload> = ({
 }: {
   state: State;
   payload: Payload;
-}) => State;
+}) => Partial<State>;
 
 export class Action<State, Payload> extends BaseDispatcher<
   Dispatcher.ACTION,
@@ -46,6 +46,7 @@ export type EffectHandler<State, Payload> = ({
   dispatch: Dispatch<State>;
   state: State;
   payload: Payload;
+  getState(): State;
 }) => void;
 
 export class Effect<State, Payload> extends BaseDispatcher<
