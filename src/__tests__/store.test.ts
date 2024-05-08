@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 
+import { Dispatcher } from "../Dispatchers";
 import { Store } from "../Store";
-import { Action, Dispatcher, Effect } from "../Dispatchers";
 
 describe("store", () => {
   it("should create store", () => {

@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { Store } from "../Store";
 import { Action, BaseDispatcher, Dispatcher } from "../Dispatchers";
+import { Store } from "../Store";
 
 class Dummy extends BaseDispatcher<any, unknown> {}
 

@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { Store } from "../Store";
 import { Action, ActionHandler } from "../Dispatchers";
+import { Store } from "../Store";
 
 describe("actions", () => {
   it("should register an action", () => {

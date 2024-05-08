@@ -1,12 +1,5 @@
 import { DispatchManager } from "./DispatchManager";
-import {
-  Action,
-  ActionHandler,
-  Dispatch,
-  Dispatcher,
-  Effect,
-  EffectHandler,
-} from "./Dispatchers";
+import { Action, ActionHandler, Effect, EffectHandler } from "./Dispatchers";
 
 export class Store<State> extends DispatchManager<State> {
   constructor(state: State) {

@@ -1,5 +1,3 @@
-import { HistoryManager } from "./HistoryManager";
-
 export abstract class StateManager<State> {
   #state: State;
   #previousState: State[];
