@@ -10,7 +10,7 @@ const increment = store.action<number>("increment", ({ state, payload }) => {
 });
 
 const plusMinus = store.action<boolean>("plus-minus", ({ state, payload }) => {
-  return state + (!!payload ? 1 : -1);
+  return state + (payload ? 1 : -1);
 });
 
 const get = store.effect("data", ({ dispatch }) => {

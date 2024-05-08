@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Action, AnyDispatcher, Dispatcher, Effect } from "./Dispatchers";
 import { StateManager } from "./StateManager";
 
@@ -44,6 +45,7 @@ export abstract class HandlerManager<State> extends StateManager<State> {
       }
 
       default: {
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         throw new TypeError(`Type '${type}' is not a valid dispatcher.`);
       }
     }

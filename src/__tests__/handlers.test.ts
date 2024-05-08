@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from "vitest";
 import { Action, BaseDispatcher, Dispatcher } from "../Dispatchers";
 import { Store } from "../Store";
 
-class Dummy extends BaseDispatcher<any, unknown> {}
+class Dummy extends BaseDispatcher<Dispatcher.ACTION, unknown> {}
 
 describe("handlers", () => {
   it("should warn if an handler is already registered with the same name ", () => {

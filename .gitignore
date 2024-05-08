@@ -1,5 +1,7 @@
 node_modules/
 
+.eslintcache
+
 .rollup.cache
 .yarn/cache
 .yarn/install-state.gz

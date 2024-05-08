@@ -10,7 +10,6 @@ describe("state", () => {
 
   it("should print previous state correctly", () => {
     const store = new Store(10);
-    const previousState = store.getState();
     const action = store.action("increment", ({ state }) => state + 10);
 
     store.dispatch(action);

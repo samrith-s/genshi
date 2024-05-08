@@ -19,9 +19,22 @@
     "import/order": [
       "error",
       {
-        "newlines-between": "always",
-        "distinct-groups": true
+        "alphabetize": {
+          "order": "asc",
+          "orderImportKind": "asc"
+        },
+        "newlines-between": "always-and-inside-groups"
       }
     ]
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "project": "./tsconfig.eslint.json"
+      }
+    }
   }
 }

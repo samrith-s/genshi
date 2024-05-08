@@ -41,7 +41,7 @@ export abstract class HistoryManager<State> extends HandlerManager<State> {
       const updatedTrace = {
         ...trace,
         previousState: this.previousState,
-        currentState: this.state as State,
+        currentState: this.state,
       };
 
       this.#history.set(symbol, updatedTrace);
