@@ -1,7 +1,7 @@
 {
-  "name": "hali",
+  "name": "@hali/core",
   "version": "0.0.0",
-  "description": "A simple and lightweight state management library for React Native",
+  "description": "A simple and lightweight JavaScript state management library for React",
   "author": "Samrith Shankar <samrith.shankar@outlook.com>",
   "license": "MIT",
   "homepage": "https://github.com/samrith-s/hali#readme",
@@ -11,6 +11,7 @@
   "main": "lib/index.cjs",
   "types": "lib/types/src/index.d.ts",
   "exports": {
+    "types": "./lib/types/src/index.d.ts",
     "import": "./lib/index.js",
     "require": "./lib/index.cjs"
   },
@@ -21,23 +22,13 @@
   "bugs": {
     "url": "https://github.com/samrith-s/hali/issues"
   },
-  "files": [
-    "lib",
-    "src"
-  ],
-  "workspaces": [
-    "packages/*"
-  ],
   "scripts": {
-    "preinstall": "yarn constraints",
     "build": "vite build",
     "lint": "eslint --cache --fix .",
-    "test": "vitest --coverage",
-    "example": "vite-node example.ts"
+    "test": "vitest --coverage"
   },
   "devDependencies": {
     "@types/node": "^20.12.11",
-    "@types/react": "^18.3.10",
     "@typescript-eslint/eslint-plugin": "^7.8.0",
     "@typescript-eslint/parser": "^7.8.0",
     "@vitest/coverage-v8": "^1.6.0",
@@ -49,13 +40,10 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-prettier": "^5.1.3",
     "prettier": "^3.2.5",
-    "process": "^0.11.10",
-    "react": "^18.3.1",
     "typescript": "^5.4.5",
     "vite": "^5.2.11",
     "vite-node": "^1.6.0",
     "vite-plugin-dts": "^3.9.1",
     "vitest": "^1.6.0"
-  },
-  "packageManager": "yarn@4.2.2"
+  }
 }
