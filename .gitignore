@@ -1,4 +1,4 @@
-node_modules/
+**/node_modules/
 
 .eslintcache
 
@@ -8,8 +8,8 @@ node_modules/
 
 lib/
 
-.test/
+**/.test/
 
-.parcel-cache/
+**/.parcel-cache/
 
 **/dist

@@ -5,6 +5,8 @@
     "source.fixAll": "explicit",
     "source.organizeImports": "never"
   },
+  "prettier.enable": true,
+  "eslint.enable": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "files.exclude": {
@@ -12,11 +14,17 @@
     "**/.rollup.cache": true,
     "**/.yarn": true,
     "**/.pnp.*": true,
-    "**/.eslintcache": true
+    "**/.eslintcache": true,
+    "**/.test/**": true,
+    "**/dist/**": true,
+    "**/.parcel-cache/**": true
   },
   "search.exclude": {
     "**/.yarn": true,
-    "**/.pnp.*": true
+    "**/.pnp.*": true,
+    "**/.test/**": true,
+    "**/dist/**": true,
+    "**/.parcel-cache/**": true
   },
   "cSpell.words": ["Hali"]
 }
