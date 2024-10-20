@@ -10,8 +10,8 @@ export class Store<State> extends DispatchManager<State> {
     name: string,
     handler: EffectHandler<State, Payload>
   ) {
-    const dispatcher = new Effect<State, Payload>(name, handler);
-    this.registerEffect(dispatcher);
+    const dispatcher = new Effect<State, Payload>(this.id, name, handler);
+    this.registerDispatcher(dispatcher);
     return dispatcher;
   }
 
@@ -19,8 +19,8 @@ export class Store<State> extends DispatchManager<State> {
     name: string,
     handler: ActionHandler<State, Payload>
   ) {
-    const dispatcher = new Action<State, Payload>(name, handler);
-    this.registerAction(dispatcher);
+    const dispatcher = new Action<State, Payload>(this.id, name, handler);
+    this.registerDispatcher(dispatcher);
     return dispatcher;
   }
 }

@@ -1,9 +1,12 @@
-export abstract class StateManager<State> {
+import { IdManager } from "./IdManager";
+
+export abstract class StateManager<State> extends IdManager {
   #state: State;
   #previousState: State[];
   #subscribers: ((state: State) => void)[] = [];
 
   constructor(state: State) {
+    super();
     this.#state = state;
     this.#previousState = [state];
   }

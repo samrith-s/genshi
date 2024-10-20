@@ -8,12 +8,14 @@ export abstract class BaseDispatcher<D extends Dispatcher, P = never> {
   public readonly displayName: string;
   public readonly type: D;
   public readonly payload: P = null as P;
+  public readonly storeId: string;
 
   #source?: DispatcherSource | null = null;
 
-  constructor({ displayName, type }: DispatcherConfig) {
+  constructor({ storeId, displayName, type }: DispatcherConfig) {
     this.displayName = displayName;
     this.type = type as D;
+    this.storeId = storeId;
   }
 
   public source(source?: DispatcherSource | null) {

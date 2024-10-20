@@ -38,8 +38,13 @@ export class Action<State, Payload> extends BaseDispatcher<
 
   public readonly handler: ActionHandler<State, Payload>;
 
-  constructor(name: string, handler: ActionHandler<State, Payload>) {
+  constructor(
+    storeId: string,
+    name: string,
+    handler: ActionHandler<State, Payload>
+  ) {
     super({
+      storeId,
       displayName: name,
       type: Dispatcher.ACTION,
     });
@@ -72,8 +77,13 @@ export class Effect<State, Payload> extends BaseDispatcher<
 
   public readonly handler: EffectHandler<State, Payload>;
 
-  constructor(name: string, handler: EffectHandler<State, Payload>) {
+  constructor(
+    storeId: string,
+    name: string,
+    handler: EffectHandler<State, Payload>
+  ) {
     super({
+      storeId,
       displayName: name,
       type: Dispatcher.EFFECT,
     });

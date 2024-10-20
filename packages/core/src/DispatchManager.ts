@@ -17,13 +17,7 @@ export class DispatchManager<State> extends HistoryManager<State> {
     const type = dispatcher.type;
     const name = dispatcher.displayName;
 
-    const handler = this.getHandler(type, name);
-
-    if (!handler) {
-      throw new Error(
-        `No ${type} dispatcher registered for '${name}' with store.`
-      );
-    }
+    const handler = this.getHandler(dispatcher);
 
     const isGlobal = !dispatcher.parent;
 

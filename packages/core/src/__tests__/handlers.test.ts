@@ -24,6 +24,7 @@ describe("handlers", () => {
     expect(() =>
       store.dispatch(
         new Dummy({
+          storeId: store.id,
           displayName: "hello",
           type: "hi" as Dispatcher,
         }) as Action<number, never>

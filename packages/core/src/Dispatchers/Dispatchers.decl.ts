@@ -9,6 +9,7 @@ export type DispatcherSource = {
 };
 
 export type DispatcherConfig = {
+  storeId: string;
   displayName: string;
   type: Dispatcher;
   source?: DispatcherSource;
