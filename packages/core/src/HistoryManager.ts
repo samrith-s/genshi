@@ -2,6 +2,8 @@ import { Dispatcher } from "./Dispatchers";
 import { HandlerManager } from "./HandlerManager";
 
 export type History<State> = {
+  id: symbol;
+  timestamp: Date;
   name: string;
   type: Dispatcher;
   previousState?: State;
@@ -22,12 +24,18 @@ export abstract class HistoryManager<State> extends HandlerManager<State> {
   #history: Map<symbol, History<State>> = new Map();
 
   protected trace(
-    history: Omit<History<State>, "previousState" | "currentState">
+    this: HistoryManager<State>,
+    history: Omit<
+      History<State>,
+      "id" | "timestamp" | "previousState" | "currentState"
+    >
   ) {
     const symbol = Symbol("trace");
 
     this.#history.set(symbol, {
+      id: symbol,
       global: false,
+      timestamp: new Date(),
       ...history,
     } as History<State>);
 
@@ -46,8 +54,8 @@ export abstract class HistoryManager<State> extends HandlerManager<State> {
     this.#history.set(symbol, updatedTrace as History<State>);
   }
 
-  public history() {
-    return [...this.#history.values()];
+  public history(this: HistoryManager<State>) {
+    return [...this.#history.values()].reverse();
   }
 
   public printHistory() {

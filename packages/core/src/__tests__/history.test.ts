@@ -17,10 +17,10 @@ describe("history", () => {
 
     store.printHistory();
 
-    expect(history[0].name).toBe("log");
-    expect(history[0].global).true;
+    expect(history[0].name).toBe("increment");
+    expect(history[0].global).false;
 
-    expect(history[1].name).toBe("increment");
-    expect(history[1].global).false;
+    expect(history[1].name).toBe("log");
+    expect(history[1].global).true;
   });
 });
