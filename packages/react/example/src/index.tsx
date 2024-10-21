@@ -15,7 +15,7 @@ const container = document.getElementById("app");
 const root = createRoot(container!);
 
 export function App() {
-  const [count, countDispatch, store] = useStore((s) => s.count);
+  const [count, countDispatch, history] = useStore((s) => s.count);
   const [timer, timerDispatch] = useStore((s) => s.timer);
   const [value, setValue] = useState(10);
 
@@ -24,7 +24,9 @@ export function App() {
       style={{
         textAlign: "center",
         width: "100%",
-        height: 200,
+        display: "grid",
+        gridTemplateRows: "max-content max-content 1fr",
+        gap: 10,
       }}
     >
       <h1>{count}</h1>
@@ -50,9 +52,55 @@ export function App() {
         </button>
       </div>
 
-      <code>
-        <pre>{JSON.stringify(store.printHistory(), null, 2)}</pre>
-      </code>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(6, 1fr)",
+          overflow: "auto",
+        }}
+      >
+        <p>
+          <strong>Timestamp</strong>
+        </p>
+        <p>
+          <strong>Name</strong>
+        </p>
+        <p>
+          <strong>Type</strong>
+        </p>
+        <p>
+          <strong>Source</strong>
+        </p>
+        <p>
+          <strong>Payload</strong>
+        </p>
+        <p>
+          <strong>Global</strong>
+        </p>
+
+        {history.map((h) => (
+          <>
+            <p>{h.timestamp.toLocaleString()}</p>
+            <p>{h.name}</p>
+            <p>{h.type}</p>
+            {h.source ? (
+              <p>
+                Name: {h.source.name}
+                <br />
+                Type: {h.source.type}
+              </p>
+            ) : (
+              <p>-</p>
+            )}
+            {h.payload !== undefined ? (
+              <p>{JSON.stringify(h.payload, null, 2)}</p>
+            ) : (
+              <p>-</p>
+            )}
+            <p>{String(!!h.global).toUpperCase()}</p>
+          </>
+        ))}
+      </div>
     </main>
   );
 }
