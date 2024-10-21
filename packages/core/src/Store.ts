@@ -1,9 +1,13 @@
 import { DispatchManager } from "./DispatchManager";
-import { Action, ActionHandler, Effect, EffectHandler } from "./Dispatchers";
+import { Action, ActionHandler } from "./Dispatchers/ActionDispatcher";
+import { Effect, EffectHandler } from "./Dispatchers/EffectDispatcher";
 
 export class Store<State> extends DispatchManager<State> {
-  constructor(state: State) {
+  constructor(state: State, name?: string) {
     super(state);
+    if (name) {
+      this.setName(name);
+    }
   }
 
   public effect<Payload = never>(

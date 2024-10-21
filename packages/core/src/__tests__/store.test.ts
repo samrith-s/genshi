@@ -9,6 +9,11 @@ describe("store", () => {
     expect(store.getState()).toBe(100);
   });
 
+  it("should set the name of the store", () => {
+    const store = new Store(100, "hey");
+    expect(store.tag).toBe("hey");
+  });
+
   it("should set the source properly", () => {
     const store = new Store(100);
 
@@ -34,7 +39,7 @@ describe("store", () => {
     expect(() => store1.dispatch(increment1)).not.toThrow();
     expect(() => store2.dispatch(increment2)).not.toThrow();
     expect(() => store2.dispatch(increment1)).toThrow(
-      `Action 'increment' cannot be fired from store '${store2.id}'`
+      `Action 'increment' cannot be fired from store '${store2.tag}'`
     );
 
     const tick1 = store1.effect("tick", vi.fn());
@@ -43,7 +48,20 @@ describe("store", () => {
     expect(() => store1.dispatch(tick1)).not.toThrow();
     expect(() => store2.dispatch(tick2)).not.toThrow();
     expect(() => store2.dispatch(tick1)).toThrow(
-      `Effect 'tick' cannot be fired from store '${store2.id}'`
+      `Effect 'tick' cannot be fired from store '${store2.tag}'`
     );
+  });
+
+  it("should throw while setting immutable properties after creation", () => {
+    const store = new Store(100, "hey");
+
+    expect(store.name).toBe("hey");
+    expect(() => (store.name = "new")).toThrow();
+
+    expect(store.tag).toBe("hey");
+    expect(() => (store.tag = "new")).toThrow();
+
+    expect(store.id).toBe(store.id);
+    expect(() => (store.id = "new")).toThrow();
   });
 });
