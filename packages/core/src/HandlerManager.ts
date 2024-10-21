@@ -1,26 +1,29 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { AnyDispatcher, Dispatcher } from "./Dispatchers";
+import { AnyDispatcher, Dispatcher, DispatchHandler } from "./Dispatchers";
 import { StateManager } from "./StateManager";
 
-export abstract class HandlerManager<State> extends StateManager<State> {
+export abstract class HandlerManager<
+  State,
+  Handler extends DispatchHandler,
+> extends StateManager<State> {
   constructor(state: State) {
     super(state);
   }
 
   #dispatchers: Set<`${Dispatcher}-${string}`> = new Set();
 
-  #exists(dispatcher: AnyDispatcher<State>) {
+  #exists(dispatcher: AnyDispatcher<Handler>) {
     const type = dispatcher.type;
     const name = dispatcher.displayName;
 
     if (this.#dispatchers.has(`${type}-${name}`)) {
       console.warn(
-        `The ${type} dispatcher with name '${name}' already exists in store '${this.id}'. Setting it again will overwrite it.`
+        `The ${type} dispatcher with name '${name}' already exists in store '${this.tag}'. Setting it again will overwrite it.`
       );
     }
   }
 
-  protected getHandler(dispatcher: AnyDispatcher<State>) {
+  protected getHandler(dispatcher: AnyDispatcher<Handler>) {
     const type = dispatcher.type;
     const name = dispatcher.displayName;
     const storeId = dispatcher.storeId;
@@ -29,20 +32,20 @@ export abstract class HandlerManager<State> extends StateManager<State> {
       const prefix = type === Dispatcher.ACTION ? "Action" : "Effect";
 
       throw new RangeError(
-        `${prefix} '${name}' cannot be fired from store '${this.id}'.`
+        `${prefix} '${name}' cannot be fired from store '${this.tag}'.`
       );
     }
 
     if (!this.#dispatchers.has(`${type}-${name}`)) {
       throw new TypeError(
-        `Dispatcher ${type} ${name} is not registered with the store '${this.id}'`
+        `Dispatcher ${type} ${name} is not registered with the store '${this.tag}'`
       );
     }
 
     return dispatcher.handler;
   }
 
-  protected registerDispatcher(dispatcher: AnyDispatcher<State>) {
+  protected registerDispatcher(dispatcher: AnyDispatcher<Handler>) {
     this.#exists(dispatcher);
     this.#dispatchers.add(`${dispatcher.type}-${dispatcher.displayName}`);
   }

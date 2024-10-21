@@ -16,7 +16,8 @@ export type History<State> = {
   };
 };
 
-export abstract class HistoryManager<State> extends HandlerManager<State> {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export abstract class HistoryManager<State> extends HandlerManager<State, any> {
   constructor(state: State) {
     super(state);
   }

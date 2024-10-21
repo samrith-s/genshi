@@ -1,3 +1,3 @@
 export * from "./BaseDispatcher";
-export * from "./AllDispatchers";
-export * from "./Dispatchers.decl";
+export * from "./ActionDispatcher";
+export * from "./EffectDispatcher";

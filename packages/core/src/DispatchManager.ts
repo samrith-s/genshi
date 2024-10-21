@@ -2,6 +2,7 @@ import {
   ActionHandler,
   Dispatch,
   Dispatcher,
+  DispatchHandler,
   EffectHandler,
 } from "./Dispatchers";
 import { HistoryManager } from "./HistoryManager";
@@ -11,13 +12,13 @@ export class DispatchManager<State> extends HistoryManager<State> {
     super(state);
   }
 
-  public dispatch: Dispatch<State> = (...args) => {
+  public dispatch: Dispatch = (...args) => {
     const dispatcher = args[0];
     const payload = args[1];
     const type = dispatcher.type;
     const name = dispatcher.displayName;
 
-    const handler = this.getHandler(dispatcher);
+    const handler = this.getHandler(dispatcher) as DispatchHandler;
 
     const isGlobal = !dispatcher.parent;
 
