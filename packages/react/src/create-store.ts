@@ -1,24 +1,30 @@
 import * as Hali from "@hali/core";
 import { useEffect, useState as useReactState } from "react";
 
-type Dispatch<State> = Hali.Dispatch<State>;
 type Store<State> = Hali.Store<State>;
 
 type Accessor<State, Value> = (state: State) => Value;
 
-export function createStore<State = unknown>(state: State) {
-  const store = new Hali.Store<State>(state);
+export function createStore<State = unknown>(state: State, name?: string) {
+  const store = new Hali.Store<State>(state, name);
 
   function useStore<Value>(accessor: Accessor<State, Value>) {
     type AccessedValue = ReturnType<typeof accessor>;
+    type History = ReturnType<typeof store.history>;
+    type Dispatch = typeof store.dispatch;
 
     const [internalState, setInternalState] = useReactState<AccessedValue>(
       accessor(state)
     );
 
+    const [internalHistory, setInternalHistory] = useReactState<
+      ReturnType<typeof store.history>
+    >(store.history());
+
     useEffect(() => {
       const subscriber = store.subscribe((state) => {
         setInternalState(accessor(state));
+        setInternalHistory(store.history());
       });
 
       return () => {
@@ -26,10 +32,10 @@ export function createStore<State = unknown>(state: State) {
       };
     }, [accessor]);
 
-    return [internalState, store.dispatch, store] as unknown as [
+    return [internalState, store.dispatch, internalHistory] as unknown as [
       AccessedValue,
-      Dispatch<State>,
-      Store<State>,
+      Dispatch,
+      History,
     ];
   }
 
