@@ -2,7 +2,6 @@ import * as Hali from "@hali/core";
 import { useEffect, useState as useReactState } from "react";
 
 type Store<State> = Hali.Store<State>;
-
 type Accessor<State, Value> = (state: State) => Value;
 
 export function createStore<State = unknown>(state: State, name?: string) {
@@ -17,9 +16,9 @@ export function createStore<State = unknown>(state: State, name?: string) {
       accessor(state)
     );
 
-    const [internalHistory, setInternalHistory] = useReactState<
-      ReturnType<typeof store.history>
-    >(store.history());
+    const [internalHistory, setInternalHistory] = useReactState<History>(
+      store.history()
+    );
 
     useEffect(() => {
       const subscriber = store.subscribe((state) => {
