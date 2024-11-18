@@ -26,7 +26,8 @@
     "src"
   ],
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "docs"
   ],
   "scripts": {
     "preinstall": "yarn constraints",
