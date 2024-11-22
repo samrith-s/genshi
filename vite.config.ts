@@ -1,38 +1,41 @@
 /* eslint-disable no-undef */
 import { resolve } from "path";
 
-import { defineConfig } from "vite";
+import { defineConfig, UserConfig } from "vite";
 import dtsPlugin from "vite-plugin-dts";
 
-export function viteConfig(path) {
-  console.log("path:", path);
+export function viteConfig(path: string[], config?: UserConfig) {
   return defineConfig({
     plugins: [
       dtsPlugin({
         outDir: "lib/types",
-        exclude: "**/__tests__",
+        include: ["src/**/*.ts", "src/**/*.tsx"],
+        exclude: ["**/__tests__", "**/example"],
       }),
+      ...(config?.plugins || []),
     ],
     build: {
       outDir: "lib",
       minify: false,
       reportCompressedSize: true,
+      ...config?.build,
       terserOptions: {
         compress: false,
         mangle: false,
         keep_classnames: true,
-        format: true,
+        ...config?.build?.terserOptions,
       },
       rollupOptions: {
         preserveEntrySignatures: "allow-extension",
         cache: false,
+        ...config?.build?.rollupOptions,
       },
       lib: {
         name: "Hali",
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        entry: resolve(...path),
         formats: ["es", "cjs"],
         fileName: "index",
+        ...config?.build?.lib,
+        entry: resolve(...path),
       },
     },
   });
