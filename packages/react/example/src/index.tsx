@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { createRoot } from "react-dom/client";
 
 import {
@@ -7,17 +7,20 @@ import {
   increment,
   minus,
   plus,
+  store,
   tick,
   useStore,
 } from "./store";
 
 const container = document.getElementById("app");
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const root = createRoot(container!);
 
 export function App() {
-  const [count, countDispatch, history] = useStore((s) => s.count);
+  const [count, countDispatch] = useStore((s) => s.count);
   const [timer, timerDispatch] = useStore((s) => s.timer);
   const [value, setValue] = useState(10);
+  const [showDetails, setShowDetails] = useState(false);
 
   return (
     <main
@@ -52,55 +55,67 @@ export function App() {
         </button>
       </div>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(6, 1fr)",
-          overflow: "auto",
-        }}
-      >
-        <p>
-          <strong>Timestamp</strong>
-        </p>
-        <p>
-          <strong>Name</strong>
-        </p>
-        <p>
-          <strong>Type</strong>
-        </p>
-        <p>
-          <strong>Source</strong>
-        </p>
-        <p>
-          <strong>Payload</strong>
-        </p>
-        <p>
-          <strong>Global</strong>
-        </p>
+      <details onClick={() => setShowDetails((prev) => !prev)}>
+        <summary>History</summary>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(6, 1fr)",
+            overflow: "auto",
+          }}
+        >
+          <p>
+            <strong>Timestamp</strong>
+          </p>
+          <p>
+            <strong>Name</strong>
+          </p>
+          <p>
+            <strong>Type</strong>
+          </p>
+          <p>
+            <strong>Source</strong>
+          </p>
+          <p>
+            <strong>Payload</strong>
+          </p>
+          <p>
+            <strong>Global</strong>
+          </p>
 
-        {history.map((h) => (
-          <>
-            <p>{h.timestamp.toLocaleString()}</p>
-            <p>{h.name}</p>
-            <p>{h.type}</p>
-            {h.source ? (
-              <p>
-                Name: {h.source.name}
-                <br />
-                Type: {h.source.type}
-              </p>
-            ) : (
-              <p>-</p>
-            )}
-            {h.payload !== undefined ? (
-              <p>{JSON.stringify(h.payload, null, 2)}</p>
-            ) : (
-              <p>-</p>
-            )}
-            <p>{String(!!h.global).toUpperCase()}</p>
-          </>
-        ))}
-      </div>
+          <hr
+            style={{
+              gridColumn: "1 / -1",
+            }}
+          />
+
+          {showDetails &&
+            store.history().map((h) => (
+              <Fragment
+                key={`${h.timestamp.valueOf()}_${h.id.valueOf().toString()}`}
+              >
+                <p>{h.timestamp.toLocaleString()}</p>
+                <p>{h.name}</p>
+                <p>{h.type}</p>
+                {h.source ? (
+                  <p>
+                    Name: {h.source.name}
+                    <br />
+                    Type: {h.source.type}
+                  </p>
+                ) : (
+                  <p>-</p>
+                )}
+                {h.payload !== undefined ? (
+                  <p>{JSON.stringify(h.payload, null, 2)}</p>
+                ) : (
+                  <p>-</p>
+                )}
+                <p>{String(!!h.global).toUpperCase()}</p>
+              </Fragment>
+            ))}
+        </div>
+      </details>
     </main>
   );
 }

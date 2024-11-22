@@ -1,4 +1,4 @@
-import { createStore } from "../../src";
+import { createStore } from "../../src/create-store";
 
 export const [useStore, store] = createStore<{
   count: number;
