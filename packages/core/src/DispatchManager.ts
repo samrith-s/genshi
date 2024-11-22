@@ -8,10 +8,6 @@ import {
 import { HistoryManager } from "./HistoryManager";
 
 export class DispatchManager<State> extends HistoryManager<State> {
-  constructor(state: State) {
-    super(state);
-  }
-
   public dispatch: Dispatch = (...args) => {
     const dispatcher = args[0];
     const payload = args[1];

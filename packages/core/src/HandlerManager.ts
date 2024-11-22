@@ -6,11 +6,7 @@ export abstract class HandlerManager<
   State,
   Handler extends DispatchHandler,
 > extends StateManager<State> {
-  constructor(state: State) {
-    super(state);
-  }
-
-  #dispatchers: Set<`${Dispatcher}-${string}`> = new Set();
+  #dispatchers = new Set<`${Dispatcher}-${string}`>();
 
   #exists(dispatcher: AnyDispatcher<Handler>) {
     const type = dispatcher.type;

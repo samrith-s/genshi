@@ -2,7 +2,7 @@ import { Dispatcher } from "./Dispatchers";
 import { HandlerManager } from "./HandlerManager";
 
 export type History<State> = {
-  id: symbol;
+  id: string;
   timestamp: Date;
   name: string;
   type: Dispatcher;
@@ -18,11 +18,7 @@ export type History<State> = {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export abstract class HistoryManager<State> extends HandlerManager<State, any> {
-  constructor(state: State) {
-    super(state);
-  }
-
-  #history: Map<symbol, History<State>> = new Map();
+  #history = new Map<string, History<State>>();
 
   protected trace(
     this: HistoryManager<State>,
@@ -31,20 +27,20 @@ export abstract class HistoryManager<State> extends HandlerManager<State, any> {
       "id" | "timestamp" | "previousState" | "currentState"
     >
   ) {
-    const symbol = Symbol("trace");
+    const id = `trace-${this.#history.size.toString().padStart(4, "0")}`;
 
-    this.#history.set(symbol, {
-      id: symbol,
+    this.#history.set(id, {
+      id,
       global: false,
       timestamp: new Date(),
       ...history,
     } as History<State>);
 
-    return symbol;
+    return id;
   }
 
-  protected traceEnd(symbol: symbol) {
-    const trace = this.#history.get(symbol);
+  protected traceEnd(id: string) {
+    const trace = this.#history.get(id);
 
     const updatedTrace = {
       ...trace,
@@ -52,7 +48,7 @@ export abstract class HistoryManager<State> extends HandlerManager<State, any> {
       currentState: this.state,
     };
 
-    this.#history.set(symbol, updatedTrace as History<State>);
+    this.#history.set(id, updatedTrace as History<State>);
   }
 
   public history(this: HistoryManager<State>) {

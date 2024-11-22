@@ -1,11 +1,11 @@
-import { generateUUID } from "./helpers/generate-uuid";
-
 export abstract class IdManager {
   readonly #id: string;
-  #name: string = "";
+  #name = "";
+
+  static #counter = 0;
 
   constructor() {
-    this.#id = generateUUID();
+    this.#id = `store-${(IdManager.#counter++).toString().padStart(4, "0")}`;
   }
 
   protected setName(name: string) {

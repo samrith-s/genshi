@@ -1,5 +1,3 @@
-import { generateUUID } from "../helpers/generate-uuid";
-
 export enum Dispatcher {
   ACTION = "action",
   EFFECT = "effect",
@@ -58,7 +56,7 @@ export abstract class BaseDispatcher<
     type,
     handler,
   }: DispatcherConfig<Handler>) {
-    this.#id = generateUUID();
+    this.#id = `store-0001`;
     this.#displayName = displayName;
     this.#type = type as D;
     this.#storeId = storeId;
