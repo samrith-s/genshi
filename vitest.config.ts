@@ -18,6 +18,7 @@ export function vitestConfig() {
         ],
       ],
       coverage: {
+        provider: "v8",
         include: ["src/**"],
         exclude: ["src/**/index.ts", "**/example.ts", "**/*.decl.ts"],
         clean: true,
@@ -26,3 +27,7 @@ export function vitestConfig() {
     },
   });
 }
+
+export const DEFAULT_CONFIG = vitestConfig();
+
+export default vitestConfig();
