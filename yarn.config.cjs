@@ -4,25 +4,36 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 // @ts-check
 
-/** @type {import('@yarnpkg/types')} */
 const { defineConfig } = require(`@yarnpkg/types`);
-/** @type {import('./package.json') & { devDependencies?: Record<string, string>, dependencies?: Record<string, string> }} */
+/** @type {import('./package.json') & { devDependencies?: Record<string, string>, dependencies?: Record<string, string>, peerDependencies?: Record<string, string> }} */
 const pkg = require("./package.json");
 
 const config = defineConfig({
   async constraints({ Yarn }) {
     for (const workspace of Yarn.workspaces()) {
       if (workspace.cwd !== ".") {
-        for (const dep of Yarn.dependencies({
-          type: "devDependencies",
+        const dependencies = Yarn.dependencies({
           workspace,
-        })) {
-          const { devDependencies, dependencies = {} } = pkg;
+        });
 
-          const version = devDependencies[dep.ident] || dependencies[dep.ident];
+        for (const dep of dependencies) {
+          const rootVersion =
+            pkg.dependencies?.[dep.ident] || pkg.devDependencies?.[dep.ident];
 
-          if (version) {
-            dep.update(version);
+          if (rootVersion) {
+            dep.update(rootVersion);
+            continue;
+          }
+
+          if (dep.type === "devDependencies") {
+            const peerVersion = dependencies.find(
+              (d) => d.ident === dep.ident && d.type === "peerDependencies"
+            )?.range;
+
+            if (peerVersion) {
+              dep.update(peerVersion);
+              continue;
+            }
           }
         }
       }
