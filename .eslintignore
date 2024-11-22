@@ -3,3 +3,8 @@
 **/.test
 **/.parcel-cache
 **/dist
+
+node_modules
+.astro
+.yarn
+.vercel

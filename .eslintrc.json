@@ -1,0 +1,52 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": ["./tsconfig.eslint.json"]
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/strict",
+    "plugin:@typescript-eslint/stylistic",
+    "plugin:import-x/recommended",
+    "plugin:import-x/typescript",
+    "prettier/prettier"
+  ],
+  "plugins": ["@typescript-eslint", "prettier", "import-x"],
+  "rules": {
+    "@typescript-eslint/consistent-type-definitions": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "args": "all",
+        "argsIgnorePattern": "^_",
+        "caughtErrors": "all",
+        "caughtErrorsIgnorePattern": "^_",
+        "destructuredArrayIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "ignoreRestSiblings": true
+      }
+    ],
+    "prettier/prettier": "error",
+    "import-x/order": [
+      "error",
+      {
+        "alphabetize": {
+          "order": "asc",
+          "orderImportKind": "asc"
+        },
+        "newlines-between": "always-and-inside-groups"
+      }
+    ]
+  },
+  "settings": {
+    "import-x/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import-x/resolver": {
+      "typescript": {
+        "project": "./tsconfig.eslint.json"
+      }
+    }
+  }
+}

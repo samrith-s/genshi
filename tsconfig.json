@@ -1,6 +1,8 @@
 {
-  "include": ["packages/**/*"],
+  "include": ["packages/**/*", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", ".rollup.cache", ".yarn"],
   "compilerOptions": {
+    "module": "ESNext",
     "baseUrl": ".",
     "alwaysStrict": true,
     "skipDefaultLibCheck": true,
