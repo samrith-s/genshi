@@ -1,10 +1,4 @@
-# Genshi
-
-A simple, composable and effective state management library for JavaScript.
-
-Currently supported adapters:
-
-- React
+<img src="assets/banner.png" width="100%" alt="Genshi banner" />
 
 ## Motivation
 
