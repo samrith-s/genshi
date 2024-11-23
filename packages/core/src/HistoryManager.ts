@@ -1,4 +1,4 @@
-import { Dispatcher } from "./Dispatchers";
+import { Dispatcher, DispatchHandler } from "./Dispatchers/@BaseDispatcher";
 import { HandlerManager } from "./HandlerManager";
 
 export type History<State> = {
@@ -16,10 +16,23 @@ export type History<State> = {
   };
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export abstract class HistoryManager<State> extends HandlerManager<State, any> {
+/**
+ * The `HistoryManager` class is a specialized handler
+ * that is used to manage the history of the store.
+ *
+ * It is an abstract class as it has no merit on its own. It is meant to be
+ * extended by other intermediary classes or the terminal class
+ */
+export abstract class HistoryManager<State> extends HandlerManager<
+  State,
+  DispatchHandler
+> {
   #history = new Map<string, History<State>>();
 
+  /**
+   * The `trace` method is used to create a trace of the dispatch. It is the
+   * primary method used to start a trace of the dispatch.
+   */
   protected trace(
     this: HistoryManager<State>,
     history: Omit<
@@ -39,8 +52,17 @@ export abstract class HistoryManager<State> extends HandlerManager<State, any> {
     return id;
   }
 
+  /**
+   * The `traceEnd` method is used to end a trace of the dispatch. The only way to
+   * end a trace is by calling this method with a valid trace id.
+   */
   protected traceEnd(id: string) {
     const trace = this.#history.get(id);
+
+    if (!trace) {
+      console.warn(`A trace with id '${id}' does not exist.`);
+      return;
+    }
 
     const updatedTrace = {
       ...trace,
@@ -51,10 +73,18 @@ export abstract class HistoryManager<State> extends HandlerManager<State, any> {
     this.#history.set(id, updatedTrace as History<State>);
   }
 
+  /**
+   * The `history` method is used to get the history of the store. It returns a new instance
+   * of the history array, so that the original history array is not mutated.
+   */
   public history(this: HistoryManager<State>) {
     return [...this.#history.values()].reverse();
   }
 
+  /**
+   * Convenience method to print the history in a table format. Useful for
+   * debugging.
+   */
   public printHistory() {
     console.table(
       this.history().map((history) => ({

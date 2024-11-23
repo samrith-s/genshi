@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { Dispatcher } from "../Dispatchers";
+import { Dispatcher } from "../Dispatchers/@BaseDispatcher";
 import { Store } from "../Store";
 
 describe("store", () => {

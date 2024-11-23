@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { Dispatcher } from "../Dispatchers";
+import { Dispatcher } from "../Dispatchers/@BaseDispatcher";
 import { Action, ActionHandler } from "../Dispatchers/ActionDispatcher";
 import { Effect, EffectHandler } from "../Dispatchers/EffectDispatcher";
 import { Store } from "../Store";

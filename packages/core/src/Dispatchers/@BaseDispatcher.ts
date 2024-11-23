@@ -33,6 +33,17 @@ export type Dispatch = <A extends AnyDispatcher<any>>(
   ...args: DispatcherArgs<A>
 ) => void;
 
+/**
+ * The base class that all dispatchers extend from.
+ *
+ * This class is abstract, and is expected to be extended by a concrete dispatcher class.
+ * The base class provides the basic structure for a dispatcher, including the dispatcher's
+ * type, store ID, display name, and handler function.
+ *
+ * This information is used across the library to provide a consistent interface for dispatchers.
+ * It also helps in debugging, as the dispatcher's type, store ID, and display name are used in
+ * history.
+ */
 export abstract class BaseDispatcher<
   D extends Dispatcher,
   Handler extends DispatchHandler,
@@ -60,7 +71,19 @@ export abstract class BaseDispatcher<
     this.#displayName = displayName;
     this.#type = type as D;
     this.#storeId = storeId;
-    this.#handler = handler;
+    this.#handler = this.finalizeHandler(handler);
+  }
+
+  /**
+   * Simple wrapper for the handler function to remove the parent dispatcher reference.
+   */
+  private finalizeHandler(handler: DispatchHandler) {
+    const finalHalder = (...args: Parameters<DispatchHandler>) => {
+      this.parent = null;
+      return handler(...args);
+    };
+
+    return finalHalder as Handler;
   }
 
   public get id() {

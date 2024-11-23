@@ -1,4 +1,4 @@
-import { BaseDispatcher, Dispatcher } from "./BaseDispatcher";
+import { BaseDispatcher, Dispatcher } from "./@BaseDispatcher";
 
 export type ActionHandler<State, Payload> = ({
   state,
@@ -8,6 +8,9 @@ export type ActionHandler<State, Payload> = ({
   payload: Payload;
 }) => State;
 
+/**
+ * The `Action` dispatcher is creates an action that can be dispatched to the store.
+ */
 export class Action<State, Payload> extends BaseDispatcher<
   Dispatcher.ACTION,
   ActionHandler<State, Payload>,
@@ -18,17 +21,11 @@ export class Action<State, Payload> extends BaseDispatcher<
     name: string,
     handler: ActionHandler<State, Payload>
   ) {
-    const finalHandler: ActionHandler<State, Payload> = (...args) => {
-      const data = handler(...args);
-      this.parent = null;
-      return data;
-    };
-
     super({
       storeId,
       displayName: name,
       type: Dispatcher.ACTION,
-      handler: finalHandler,
+      handler,
     });
   }
 }

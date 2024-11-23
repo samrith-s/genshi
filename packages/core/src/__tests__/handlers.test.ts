@@ -1,9 +1,11 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { Action, BaseDispatcher, Dispatcher } from "../Dispatchers";
+import { BaseDispatcher, Dispatcher } from "../Dispatchers/@BaseDispatcher";
+import { Action } from "../Dispatchers/ActionDispatcher";
 import { Store } from "../Store";
 
-class Dummy extends BaseDispatcher<Dispatcher.ACTION, unknown> {}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+class Dummy extends BaseDispatcher<Dispatcher.ACTION, any> {}
 
 describe("handlers", () => {
   it("should warn if an handler is already registered with the same name ", () => {
@@ -27,6 +29,7 @@ describe("handlers", () => {
           storeId: store.id,
           displayName: "hello",
           type: "hi" as Dispatcher,
+          handler: undefined,
         }) as Action<number, never>
       )
     ).toThrowError(TypeError);
