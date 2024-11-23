@@ -8,7 +8,7 @@ const argv = minimist(process.argv.slice(2));
 
 const { shouldPublish } = argv;
 
-const PACKAGE_NAME = `@hali/${basename(process.env.INIT_CWD || "")}`;
+const PACKAGE_NAME = `@genshi/${basename(process.env.INIT_CWD || "")}`;
 const MANIFEST_PATH = resolve(process.env.INIT_CWD || "", "package.json");
 const MANIFEST_BACKUP_PATH = resolve(
   process.env.INIT_CWD || "",
@@ -34,7 +34,9 @@ async function main() {
   if (shouldPublish) {
     if (shouldPublish === "yes") {
       console.log("Publishing (actually)");
-      spawnSync("yarn", ["workspace", PACKAGE_NAME, "npm", "publish"]);
+      spawnSync("yarn", ["workspace", PACKAGE_NAME, "npm", "publish"], {
+        stdio: "inherit",
+      });
     } else {
       console.log("Publishing (not really)");
     }

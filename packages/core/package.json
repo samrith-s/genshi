@@ -1,10 +1,10 @@
 {
-  "name": "@hali/core",
+  "name": "@genshi/core",
   "version": "0.0.0",
   "description": "A simple, composable and effective JavaScript state management library",
   "author": "Samrith Shankar <samrith.shankar@outlook.com>",
   "license": "MIT",
-  "homepage": "https://hali.samrith.dev",
+  "homepage": "https://genshi.samrith.dev",
   "type": "module",
   "source": "src/index.ts",
   "module": "lib/index.js",
@@ -17,10 +17,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/samrith-s/hali.git"
+    "url": "https://github.com/samrith-s/genshi.git"
   },
   "bugs": {
-    "url": "https://github.com/samrith-s/hali/issues"
+    "url": "https://github.com/samrith-s/genshi/issues"
   },
   "files": [
     "README.md",

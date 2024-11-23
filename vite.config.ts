@@ -38,7 +38,7 @@ export function viteConfig(path: string[], config?: UserConfig) {
         ],
       },
       lib: {
-        name: "Hali",
+        name: "Genshi",
         formats: ["es", "cjs"],
         fileName: "index",
         ...config?.build?.lib,

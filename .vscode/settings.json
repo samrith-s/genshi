@@ -26,5 +26,5 @@
     "**/dist/**": true,
     "**/.parcel-cache/**": true
   },
-  "cSpell.words": ["Hali"]
+  "cSpell.words": ["Genshi"]
 }

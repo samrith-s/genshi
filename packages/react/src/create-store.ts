@@ -1,7 +1,7 @@
-import * as Hali from "@hali/core";
+import * as Genshi from "@genshi/core";
 import { useSyncExternalStore } from "react";
 
-type Store<State> = Hali.Store<State>;
+type Store<State> = Genshi.Store<State>;
 type Accessor<State, Value> = (state: State) => Value;
 
 /**
@@ -61,7 +61,7 @@ export function createStore<State = unknown>(
   initialState: State,
   name?: string
 ) {
-  const store = new Hali.Store<State>(initialState, name);
+  const store = new Genshi.Store<State>(initialState, name);
 
   const subscriber = createSubscriber<State>(store);
   const getSnapshot = createSnapshot<State>(store);

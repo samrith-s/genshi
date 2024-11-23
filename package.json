@@ -1,10 +1,10 @@
 {
-  "name": "hali",
+  "name": "genshi",
   "version": "0.0.0",
   "description": "A simple and lightweight state management library for React Native",
   "author": "Samrith Shankar <samrith.shankar@outlook.com>",
   "license": "MIT",
-  "homepage": "https://github.com/samrith-s/hali#readme",
+  "homepage": "https://github.com/samrith-s/genshi#readme",
   "type": "module",
   "source": "src/index.ts",
   "module": "lib/index.js",
@@ -16,10 +16,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/samrith-s/hali.git"
+    "url": "git+ssh://git@github.com/samrith-s/genshi.git"
   },
   "bugs": {
-    "url": "https://github.com/samrith-s/hali/issues"
+    "url": "https://github.com/samrith-s/genshi/issues"
   },
   "files": [
     "lib",

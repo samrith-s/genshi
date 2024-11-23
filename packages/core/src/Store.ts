@@ -1,14 +1,14 @@
 /**
- * Welcome to Hali!
+ * Welcome to Genshi!
  *
- * Hali is a state management library that is designed to be simple and easy to use.
+ * Genshi is a state management library that is designed to be simple and easy to use.
  * It is inspired by the Elm architecture and Redux.
  *
- * Hali is designed to be modular and extensible. It is built on the principle of
- * composition over inheritance. This means that any new functionality added to Hali
+ * Genshi is designed to be modular and extensible. It is built on the principle of
+ * composition over inheritance. This means that any new functionality added to Genshi
  * should be composed by existing and new classes which follow a chain of inheritance.
  *
- * Hali follows two major terminologies in classes.
+ * Genshi follows two major terminologies in classes.
  * - Root (origin class in the list of inherited classes)
  * - Terminal (final class in the list of classes, which is exposed to the consumer)
  *
@@ -56,7 +56,7 @@ export class Store<State> extends DispatchManager<State> {
   }
 
   /**
-   * Register an action with the store. In Hali, an Action is used to
+   * Register an action with the store. In Genshi, an Action is used to
    * update the state.
    *
    * ```ts
@@ -80,7 +80,7 @@ export class Store<State> extends DispatchManager<State> {
   }
 
   /**
-   * Register an effect with the store. In Hali, an Effects is used to
+   * Register an effect with the store. In Genshi, an Effects is used to
    * perform side effects like API calls, logging, etc.
    *
    * ```ts

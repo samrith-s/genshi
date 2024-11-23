@@ -1,4 +1,4 @@
-# Hali
+# Genshi
 
 A simple, composable and effective state management library for JavaScript.
 
@@ -16,11 +16,11 @@ As more of our frontend code moves to server-side rendering or server-driven con
 
 Another common problem which a lot of developers echo, is that with a lot of UI libraries/frameworks, there is no distinctly clear way to segregate you code. You can easily mix side effects and state updates.
 
-## Introducing - Hali
+## Introducing - Genshi
 
-Hali is built to be extremely lightweight (~2.5kb gzipped), but provide you the ability to manage state for simple counters to rich text notes.
+Genshi is built to be extremely lightweight (~2.5kb gzipped), but provide you the ability to manage state for simple counters to rich text notes.
 
-Hali is inspired by the [Elm architecture](https://guide.elm-lang.org/architecture/), and focuses on two major things:
+Genshi is inspired by the [Elm architecture](https://guide.elm-lang.org/architecture/), and focuses on two major things:
 
 - **Actions:** which directly update your application state
 - **Effects:** which encapsulate side-effects like API calls, logging and other asynchronous operations
@@ -29,25 +29,25 @@ Hali is inspired by the [Elm architecture](https://guide.elm-lang.org/architectu
 
 This project (as of now) consists of two packages:
 
-- **[@hali/core](https://github.com/samrith-s/hali/tree/main/packages/core):** Which provides the entire functionality of Hali in one package
-- **[@hali/react](https://github.com/samrith-s/hali/tree/main/packages/react):** The adapter for React which has a slim binding on top of `@hali/core` to provide interoperability with React
+- **[@genshi/core](https://github.com/samrith-s/genshi/tree/main/packages/core):** Which provides the entire functionality of Genshi in one package
+- **[@genshi/react](https://github.com/samrith-s/genshi/tree/main/packages/react):** The adapter for React which has a slim binding on top of `@genshi/core` to provide interoperability with React
 
 ## Core API
 
-As a runtime consumable, Hali exposes only ONE export - the `Store` class.
+As a runtime consumable, Genshi exposes only ONE export - the `Store` class.
 
 ### Usage with React
 
 To get started, install the React adapter:
 
 ```bash
-npm i @hali/react
+npm i @genshi/react
 ```
 
 Now, you can create your store and the actions and effects.
 
 ```ts
-import { createStore } from "@hali/react";
+import { createStore } from "@genshi/react";
 
 export const [useStore, store] = createStore(0);
 
@@ -87,6 +87,6 @@ function Counter() {
 
 ## Usage with other JavaScript frameworks or libraries
 
-Since Hali is made using pure JavaScript, you can directly consume the `@hali/core` package to consume it however you see fit.
+Since Genshi is made using pure JavaScript, you can directly consume the `@genshi/core` package to consume it however you see fit.
 
 The store we created above can just as easily be used in any other flavour.
