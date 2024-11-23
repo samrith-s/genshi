@@ -5,7 +5,7 @@
   "description": "A simple, composable and effective JavaScript state management library for React",
   "author": "Samrith Shankar <samrith.shankar@outlook.com>",
   "license": "MIT",
-  "homepage": "https://github.com/samrith-s/genshi#readme",
+  "homepage": "https://genshi.samrith.dev",
   "type": "module",
   "source": "src/index.ts",
   "module": "lib/index.js",
