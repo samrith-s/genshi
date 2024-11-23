@@ -1,10 +1,10 @@
 {
   "name": "@hali/core",
   "version": "0.0.0",
-  "description": "A simple and lightweight JavaScript state management library for React",
+  "description": "A simple, composable and effective JavaScript state management library",
   "author": "Samrith Shankar <samrith.shankar@outlook.com>",
   "license": "MIT",
-  "homepage": "https://github.com/samrith-s/hali#readme",
+  "homepage": "https://hali.samrith.dev",
   "type": "module",
   "source": "src/index.ts",
   "module": "lib/index.js",
@@ -17,12 +17,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/samrith-s/hali.git"
+    "url": "https://github.com/samrith-s/hali.git"
   },
   "bugs": {
     "url": "https://github.com/samrith-s/hali/issues"
   },
+  "files": [
+    "README.md",
+    "LICENSE",
+    "lib"
+  ],
   "scripts": {
+    "publish": "yarn g:publish",
     "build": "vite build",
     "lint": "eslint --cache --fix .",
     "test": "vitest --coverage"

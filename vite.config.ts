@@ -8,12 +8,16 @@ export function viteConfig(path: string[], config?: UserConfig) {
   return defineConfig({
     plugins: [
       dtsPlugin({
+        insertTypesEntry: true,
         outDir: "lib/types",
-        include: ["src/**/*.ts", "src/**/*.tsx"],
+        include: ["src/**/*.ts", "src/**/*.tsx", "../core/src/**/*.ts"],
         exclude: ["**/__tests__", "**/example"],
       }),
       ...(config?.plugins || []),
     ],
+    resolve: {
+      preserveSymlinks: true,
+    },
     build: {
       outDir: "lib",
       minify: false,
@@ -29,6 +33,9 @@ export function viteConfig(path: string[], config?: UserConfig) {
         preserveEntrySignatures: "allow-extension",
         cache: false,
         ...config?.build?.rollupOptions,
+        external: [
+          ...((config?.build?.rollupOptions?.external || []) as string[]),
+        ],
       },
       lib: {
         name: "Hali",
@@ -40,3 +47,5 @@ export function viteConfig(path: string[], config?: UserConfig) {
     },
   });
 }
+
+export default viteConfig([]);
