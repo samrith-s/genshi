@@ -34,9 +34,13 @@ async function main() {
   if (shouldPublish) {
     if (shouldPublish === "yes") {
       console.log("Publishing (actually)");
-      spawnSync("yarn", ["workspace", PACKAGE_NAME, "npm", "publish"], {
-        stdio: "inherit",
-      });
+      try {
+        spawnSync("yarn", ["workspace", PACKAGE_NAME, "npm", "publish"], {
+          stdio: "inherit",
+        });
+      } catch (e) {
+        console.error("Publish failed", e);
+      }
     } else {
       console.log("Publishing (not really)");
     }
