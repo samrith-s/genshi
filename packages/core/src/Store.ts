@@ -24,7 +24,8 @@
  * 2. The `Store` class should be as light-weight as possible and only expose methods that are
  *  necessary for the consumer.
  * 3. Any new functionality for which an intermediary class doesn't exist, should go in its
- *  own class and be inherited by the `Store` class.
+ *  own class and can reside anywhere between the terminal and root classes, provided no other
+ *  functionality of the other intermediary classes break.
  *
  * @example
  * If we were to add a logging functionality, the we will create a `LoggerManager` class.

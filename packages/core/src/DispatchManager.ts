@@ -89,7 +89,6 @@ export abstract class DispatchManager<State> extends HistoryManager<State> {
 
             this.dispatch(...argv);
           },
-          getState: this.getState,
         });
 
         break;

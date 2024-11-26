@@ -7,7 +7,6 @@ export type EffectHandler<State, Payload> = ({
   dispatch: Dispatch;
   state: State;
   payload: Payload;
-  getState(): State;
 }) => void;
 
 /**
