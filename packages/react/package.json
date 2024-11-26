@@ -1,7 +1,6 @@
 {
   "name": "@genshi/react",
   "version": "0.0.0",
-  "private": false,
   "description": "A simple, composable and effective JavaScript state management library for React",
   "author": "Samrith Shankar <samrith.shankar@outlook.com>",
   "license": "MIT",
@@ -24,6 +23,7 @@
   },
   "scripts": {
     "publish": "yarn g:publish",
+    "dev": "vite build -w",
     "build": "vite build",
     "lint": "eslint --cache --fix .",
     "test": "vitest --coverage",
