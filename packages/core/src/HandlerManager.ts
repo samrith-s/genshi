@@ -52,34 +52,7 @@ export abstract class HandlerManager<
   protected getHandler(dispatcher: AnyDispatcher<Handler>) {
     const type = dispatcher.type;
     const name = dispatcher.displayName;
-    const storeId = dispatcher.storeId;
 
-    /**
-     * This check is to ensure that the dispatcher is not fired from a store
-     * that it is not registered with.
-     *
-     * This is a runtime check and will throw an error in production as well. The
-     * expectation is that the consumer will consume this error and fix it in their
-     * codebase.
-     *
-     * Why is this here? Consider an example with two stores `StoreA` and `StoreB`.
-     * and an action `increment` that is registered with both `StoreA` and `StoreB`. This check
-     * will ensure that `increment` registered with `StoreA` is only fired from `StoreA`, thus
-     * preventing any side-effects that might occur if a wrong action is fired from wrong store.
-     */
-    if (this.id !== storeId) {
-      const prefix = type === Dispatcher.ACTION ? "Action" : "Effect";
-
-      throw new RangeError(
-        `${prefix} '${name}' cannot be fired from store '${this.tag}'.`
-      );
-    }
-
-    /**
-     * This check is to ensure that the dispatcher is registered with the store.
-     * The error thrown here is an expected behaviour and the expectation is that
-     * the consumer will consume this error and fix it in their codebase.
-     */
     if (!this.#dispatchers.has(`${type}-${name}`)) {
       throw new TypeError(
         `Dispatcher ${type} ${name} is not registered with the store '${this.tag}'`

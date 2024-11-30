@@ -27,28 +27,51 @@ export abstract class DispatchManager<State> extends HistoryManager<State> {
     const payload = args[0];
     const type = dispatcher.type;
     const name = dispatcher.displayName;
-
-    const handler = this.getHandler(dispatcher) as DispatchHandler;
-
+    const storeId = dispatcher.storeId;
     const isGlobal = !dispatcher.parent;
 
     /**
-     * Since `DispatchManager` extends `@HistoryManager`, we use the `trace`
+     * This check is to ensure that the dispatcher is not fired from a store
+     * that it is not registered with.
+     *
+     * This is a runtime check and will throw an error in production as well. The
+     * expectation is that the consumer will consume this error and fix it in their
+     * codebase.
+     *
+     * Why is this needed? Consider an example with two stores `StoreA` and `StoreB`.
+     * and an action `increment` that is registered with both `StoreA` and `StoreB`. This check
+     * will ensure that `increment` registered with `StoreA` is only fired from `StoreA`, thus
+     * preventing any side-effects that might occur if a wrong action is fired from wrong store.
+     */
+    if (this.id !== storeId) {
+      const prefix = type === Dispatcher.ACTION ? "Action" : "Effect";
+
+      throw new RangeError(
+        `${prefix} '${name}' cannot be fired from store '${this.tag}'.`
+      );
+    }
+
+    const handler = this.getHandler(dispatcher) as DispatchHandler;
+
+    /**
+     * Since `DispatchManager` extends `HistoryManager`, we use the `trace`
      * method to create a trace of the dispatch.
      */
     const trace = this.trace({
-      global: isGlobal,
       name,
       type,
       payload,
       ...(!isGlobal
         ? {
+            global: false,
             source: {
               name: dispatcher.parent?.displayName,
               type: dispatcher.parent?.type,
             },
           }
-        : {}),
+        : {
+            global: true,
+          }),
     });
 
     switch (type) {
@@ -61,7 +84,7 @@ export abstract class DispatchManager<State> extends HistoryManager<State> {
 
         this.setState(
           actionHandler({
-            state: this.getState(),
+            state: this.state,
             payload,
           })
         );
