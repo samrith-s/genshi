@@ -1,6 +1,6 @@
 {
   "name": "@genshi/core",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A simple, composable and effective JavaScript state management library",
   "author": "Samrith Shankar <samrith.shankar@outlook.com>",
   "license": "MIT",
