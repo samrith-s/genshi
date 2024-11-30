@@ -1,11 +1,22 @@
 import { describe, expect, it, vi } from "vitest";
 
+import { StateManager } from "../StateManager";
 import { Store } from "../Store";
 
 describe("state", () => {
   it("should print state correctly", () => {
     const store = new Store(10);
     expect(store.getState()).toBe(10);
+  });
+
+  it("should not allow setting state in any way except through `setState`", () => {
+    const sm = new (class extends StateManager<number> {
+      public dummySetter(value: number) {
+        this.state = value;
+      }
+    })(10);
+
+    expect(() => sm.dummySetter(10)).toThrowError();
   });
 
   it("should print previous state correctly", () => {
@@ -16,6 +27,16 @@ describe("state", () => {
 
     expect(store.getState()).toBe(20);
     expect(store.getPreviousStates()).toStrictEqual([10, 10]);
+  });
+
+  it("should not allow setting previous state in any way via inherited classes", () => {
+    const sm = new (class extends StateManager<number> {
+      public dummySetter(value: number) {
+        this.previousState = value;
+      }
+    })(10);
+
+    expect(() => sm.dummySetter(10)).toThrowError();
   });
 
   it("should emit an event when state changes", () => {

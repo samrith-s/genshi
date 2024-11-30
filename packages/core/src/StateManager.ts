@@ -7,6 +7,9 @@ import { IdManager } from "./IdManager";
  * extended and provides the necessary methods to interact with the state.
  */
 export abstract class StateManager<State> extends IdManager {
+  /**
+   * Only mutate this directly within `setState` method. Otherwise
+   */
   #state: State;
   #previousStates: State[];
   #subscribers: ((state: State) => void)[] = [];
@@ -15,6 +18,46 @@ export abstract class StateManager<State> extends IdManager {
     super();
     this.#state = state;
     this.#previousStates = [state];
+  }
+
+  /**
+   * We have this property separately to make it easier to access the
+   * state in the classes that inherit `StateManager`.
+   */
+  protected get state() {
+    return this.getState();
+  }
+
+  /**
+   * Never allow setting state directly via this property. It should only be
+   * mutated via the `setState` method to ensure any optimisations or features
+   * we might add while updating state will be centrally managed.
+   */
+  protected set state(_value: State) {
+    throw new Error(
+      "You cannot set the state directly. Use the `setState` method instead."
+    );
+  }
+
+  /**
+   * We have this method separately to make it easier to access the
+   * previous state in the classes that inherit from `StateManager`.
+   *
+   * It is by design that the property only returns the immediately previous state.
+   * If you need to access more than one previous state, use the `getPreviousStates` method.
+   */
+  protected get previousState() {
+    return this.#previousStates[0];
+  }
+
+  /**
+   * Never allow setting previous state directly. It is populated internally as
+   * a side effect of setting the state.
+   */
+  protected set previousState(_value: State) {
+    throw new Error(
+      "You cannot set the previous state directly. It is managed internally."
+    );
   }
 
   /**
@@ -32,30 +75,15 @@ export abstract class StateManager<State> extends IdManager {
   }
 
   /**
-   * We have this method separately to make it easier to access the
-   * state in the classes that inherit from `StateManager`.
-   *
-   */
-  protected get state() {
-    return this.#state;
-  }
-
-  /**
    * The `getState` method is used to get the current state.
    */
-  public getState = () => {
-    return this.#state;
-  };
-
-  /**
-   * We have this method separately to make it easier to access the
-   * previous state in the classes that inherit from `StateManager`.
-   *
-   * It is by design that the property only returns the immediately previous state.
-   * If you need to access more than one previous state, use the `getPreviousStates` method.
-   */
-  protected get previousState() {
-    return this.#previousStates[0];
+  public getState() {
+    /**
+     * Always returning a sealed object to prevent accidental mutation.
+     *
+     * @todo(samrith-s): Is this really necessary?
+     */
+    return Object.seal(this.#state);
   }
 
   /**
