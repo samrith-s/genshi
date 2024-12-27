@@ -6,10 +6,11 @@ import { defineConfig } from "astro/config";
 
 // https://astro.build/config
 export default defineConfig({
+  output: "static",
   integrations: [
     starlight({
       title: "Genshi",
-      pagination: false,
+      pagination: true,
       titleDelimiter: "/",
       description:
         "Simple, composable, and effective state management for JavaScript.",
@@ -24,12 +25,8 @@ export default defineConfig({
       },
       sidebar: [
         {
-          label: "Getting started",
-          autogenerate: { directory: "getting-started" },
-        },
-        {
-          label: "Frameworks",
-          autogenerate: { directory: "frameworks" },
+          label: "Project",
+          autogenerate: { directory: "project" },
         },
         {
           label: "Guides",
@@ -43,9 +40,6 @@ export default defineConfig({
         },
       ],
       customCss: ["./src/tailwind.css", "@fontsource-variable/inter"],
-      expressiveCode: {
-        themes: ["vesper"],
-      },
     }),
     tailwind({ applyBaseStyles: false }),
     react(),

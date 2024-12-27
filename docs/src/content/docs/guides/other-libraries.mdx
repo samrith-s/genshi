@@ -1,0 +1,118 @@
+---
+title: Using with other libraries
+description: Learn how to use Genshi with other libraries
+sidebar:
+  order: 100
+---
+
+import { Code, TabItem, Tabs } from "@astrojs/starlight/components";
+
+Genshi is written in TypeScript and can be used with any JavaScript framework or library.
+
+If you are using a library that is not officially supported, you can still use Genshi with it. You will have to create your library-specific bindings to work with the library.
+
+## Installation
+
+To use Genshi with other libraries, you need to install the core package using your favorite package manager.
+
+<Tabs syncKey="package-manager">
+  <TabItem label="npm">
+    <Code code="npm install @genshi/core" lang="bash" frame="code" />
+  </TabItem>
+  <TabItem label="yarn">
+    <Code code="yarn add @genshi/core" lang="bash" frame="code" />
+  </TabItem>
+  <TabItem label="pnpm">
+    <Code code="pnpm install @genshi/core" lang="bash" frame="code" />
+  </TabItem>
+</Tabs>
+
+## Usage
+
+Genshi provides a `Store` class that you can use to create a store for your application.
+
+Everything you need to manage your application state is provided by the `Store` class.
+
+### Creating our store
+
+First, let's create a store with an initial state.
+
+```ts
+import { createStore } from "@genshi/react";
+
+const [store, useStore] = createStore({
+  count: 0,
+});
+```
+
+The `createStore` function returns a tuple with an instance of `Store` class and the `useStore` hook.
+
+Now, we can define our actions and effects.
+
+### Defining actions
+
+Let us define an action to increment the count, using the store we created above.
+
+```ts
+const increment = store.action("increment", (state) => ({
+  ...state,
+  count: state.count + 1,
+}));
+```
+
+Here, we are using the `action` method on the store instance to define an action named `increment`. The action takes the current state as an argument and returns the new state.
+
+### Defining effects
+
+Let us define an effect to increment the count every second.
+
+```ts
+const tick = store.effect("tick", ({ dispatch }) => {
+  setInterval(() => {
+    dispatch(increment);
+  }, 1000);
+});
+```
+
+The `effect` method on the store instance is used to define an effect named `tick`. The effector function provides many properties to ease managing effects. One such property is the `dispatch` method.
+
+Here, we are using the `setInterval` function to dispatch the `increment` action - that we created earlier - every second.
+
+### Using the store in your application
+
+Now that we have defined our actions and effects, we can use the store in our application.
+
+In this case, we will consider a simple counter application built in React, that uses the `@genshi/core` package directly.
+
+```ts {"Set the initial count value from store":2-3} {"Subscribe to the store to listen for changes to state":5-12} {"Dispatch the tick action as soon as our application mounts":14-17} {"Increment the count when the button is clicked":19-22}
+function Counter() {
+
+  const [count, setCount] = useState(store.getState().count);
+
+
+  useEffect(() => {
+    const listener = store.subscribe((state) => {
+      setCount(state.count);
+    });
+
+    return listener.remove;
+  }, []);
+
+
+  useEffect(() => {
+    store.dispatch(tick);
+  }, []);
+
+
+  const handleIncrement = () => {
+    store.dispatch(increment);
+  };
+
+  return (
+    <>
+      <button onClick={handleIncrement}>Increment</button>
+      <p>The count is: {count}</p>
+    </>
+  );
+}
+```

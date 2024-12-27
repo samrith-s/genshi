@@ -33,7 +33,9 @@ html {
   }
 }
 
-.header {
+header.header {
+  @apply border-b border-b-gray-500 border-opacity-20;
+
   .site-title {
     img {
       @apply h-8;
@@ -41,9 +43,12 @@ html {
   }
 }
 
+#starlight__sidebar {
+  @apply border-r-0 md:border-r border-r-gray-500 border-opacity-20;
+  background-color: var(--sl-color-bg);
+}
+
 .header,
-#starlight__sidebar,
-#starlight__mobile-toc,
 [aria-labelledby="starlight__on-this-page--mobile"] {
   @apply bg-transparent backdrop-blur;
 }
@@ -67,12 +72,20 @@ html {
   }
 }
 
-#example-code figure {
-  @apply border-none rounded-lg;
+.expressive-code .ec-line.mark {
+  @apply !bg-gray-700/50;
+}
+
+.expressive-code figure.frame {
+  @apply border-none rounded-lg shadow-none overflow-hidden;
 
   pre {
     @apply rounded-lg;
   }
+}
+
+aside {
+  @apply rounded-lg;
 }
 
 .sl-link-button {
@@ -81,4 +94,17 @@ html {
 
 .card {
   @apply rounded-xl;
+}
+
+.main-pane,
+main.main-pane {
+  @apply !w-full;
+
+  .sl-container {
+    @apply mx-auto;
+  }
+}
+
+.starlight-aside {
+  @apply text-sm;
 }

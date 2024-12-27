@@ -6,6 +6,7 @@
     "source.fixAll": "explicit",
     "source.organizeImports": "never"
   },
+  "prettier.documentSelectors": ["**/*.astro"],
   "prettier.enable": true,
   "eslint.enable": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",

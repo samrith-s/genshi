@@ -1,0 +1,49 @@
+---
+import { Badge, Icon } from "@astrojs/starlight/components";
+
+import { cn } from "~/utils/cn";
+
+type Props = {
+  name: string;
+  href: string;
+  description: string;
+} & (
+  | {
+      icon: "react" | "svelte" | "vue" | "angular";
+      custom?: false;
+    }
+  | {
+      icon?: never;
+      custom: true;
+    }
+);
+
+const { name, icon, href, custom, description } = Astro.props;
+---
+
+<a
+  href={href}
+  class={cn(
+    "grid",
+    "grid-flow-row",
+    "w-full",
+    "p-6",
+    "no-underline",
+    "rounded-lg",
+    "dark:bg-gray-800",
+    "bg-gray-100",
+    "border",
+    "border-transparent",
+    "hover:border-accent-500",
+    "text-inherit",
+    "group"
+  )}
+>
+  <span
+    class="flex items-center gap-2 text-accent-600 group-hover:text-accent-600"
+  >
+    <Icon name={custom ? "setting" : (`seti:${icon}` as any)} size="24px" />
+    <strong class="text-lg font-semibold">{name}</strong>
+  </span>
+  <p class="text-sm text-black dark:text-white pl-8">{description}</p>
+</a>
