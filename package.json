@@ -26,8 +26,7 @@
     "src"
   ],
   "workspaces": [
-    "packages/*",
-    "docs"
+    "packages/*"
   ],
   "scripts": {
     "g:publish": "vite-node --script scripts/publish.ts",

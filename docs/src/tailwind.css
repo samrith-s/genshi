@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+Add additional Tailwind styles to this file, for example with @layer:
+https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer
+*/
+
+:root {
+  --sl-font: "Inter Variable", sans-serif;
+}
+
+html {
+  @apply scroll-smooth;
+}
+
+.hero {
+  display: block;
+
+  .sl-flex {
+    justify-content: center;
+    align-items: center;
+
+    & h1 {
+      font-weight: 900;
+      @apply max-w-4xl text-5xl text-center;
+    }
+
+    & .tagline {
+      @apply text-center;
+    }
+  }
+}
+
+.header {
+  .site-title {
+    img {
+      @apply h-8;
+    }
+  }
+}
+
+.header,
+#starlight__sidebar,
+#starlight__mobile-toc,
+[aria-labelledby="starlight__on-this-page--mobile"] {
+  @apply bg-transparent backdrop-blur;
+}
+
+.sl-steps {
+  & > li {
+    @apply pt-12;
+
+    &:after,
+    &:before {
+      @apply mt-12;
+    }
+
+    &:after {
+      height: calc(100% - var(--bullet-size) - var(--bullet-margin));
+    }
+
+    &:last-of-type:after {
+      display: none;
+    }
+  }
+}
+
+#example-code figure {
+  @apply border-none rounded-lg;
+
+  pre {
+    @apply rounded-lg;
+  }
+}
+
+.sl-link-button {
+  @apply rounded-xl;
+}
+
+.card {
+  @apply rounded-xl;
+}
