@@ -24,7 +24,7 @@ html {
 
     & h1 {
       font-weight: 900;
-      @apply max-w-4xl text-5xl text-center;
+      @apply max-w-4xl mt-10 text-4xl text-center md:mt-0 md:text-5xl;
     }
 
     & .tagline {
