@@ -91,11 +91,11 @@ aside {
 }
 
 .sl-link-button {
-  @apply rounded-xl;
+  @apply !rounded-xl;
 }
 
 .card {
-  @apply rounded-xl;
+  @apply !rounded-xl;
 }
 
 .main-pane,
