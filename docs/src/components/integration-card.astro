@@ -34,16 +34,16 @@ const { name, icon, href, custom, description } = Astro.props;
     "bg-gray-100",
     "border",
     "border-transparent",
-    "hover:border-accent-500",
+    "hover:border-gray-500/50",
     "text-inherit",
-    "group"
+    "group",
+    "cursor-pointer",
+    "!text-current"
   )}
 >
-  <span
-    class="flex items-center gap-2 text-accent-600 group-hover:text-accent-600"
-  >
+  <span class="flex items-center gap-2">
     <Icon name={custom ? "setting" : (`seti:${icon}` as any)} size="24px" />
     <strong class="text-lg font-semibold">{name}</strong>
   </span>
-  <p class="text-sm text-black dark:text-white pl-8">{description}</p>
+  <p class="text-sm text-gray-500 pl-8">{description}</p>
 </a>

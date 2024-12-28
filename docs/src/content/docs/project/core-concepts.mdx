@@ -1,15 +1,23 @@
 ---
 title: Core concepts
 description: The core concepts of Genshi which make it unique.
-next: false
 sidebar:
   order: 0
 ---
 
-Genshi is inspired by the [Elm architecture](https://guide.elm-lang.org/architecture/), and focuses on two major things:
+Genshi focuses on two major concepts:
 
-- **Actions** - which directly update your application state
-- **Effects** - which encapsulate side-effects like API calls, logging and other asynchronous operations
+- Actions
+- Effects
+
+Some other terminologies commonly used within these docs are:
+
+- State
+- Store
+- Dispatchers
+- Payloads
+
+Most of these concepts are terms that you would be familiar with since they are common in state management libraries.
 
 ## State
 
@@ -77,4 +85,35 @@ const fetchUser = store.effect("fetchUser", async ({ dispatch }) => {
 
   dispatch(increment);
 });
+```
+
+## Dispatcher
+
+The dispatcher is a function that is used to dispatch actions and effects. It is provided by the store.
+
+A dispatch is a way to send a message to the store, which then updates the state or performs an effect based on the type of message.
+
+Here is an example of dispatching an action:
+
+```ts
+const store = new Store(0);
+const increment = store.action("increment", (state) => state + 1);
+store.dispatch(increment);
+```
+
+## Payloads
+
+Payloads are the arguments that you pass to actions and effects. They are used to pass data to the action or effect.
+
+:::tip
+Payloads can be strictly typed in Genshi. Head over to the [TypeScript](/guides/typescript) guide to learn more.
+:::
+
+Here is an example of an action that takes a payload:
+
+```ts
+const setCount = store.action("setCount", (state, count) => ({
+  ...state,
+  count,
+}));
 ```

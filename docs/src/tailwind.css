@@ -72,8 +72,10 @@ header.header {
   }
 }
 
-.expressive-code .ec-line.mark {
-  @apply !bg-gray-700/50;
+.expressive-code {
+  .ec-line.mark {
+    @apply !bg-gray-700/50;
+  }
 }
 
 .expressive-code figure.frame {
@@ -107,4 +109,8 @@ main.main-pane {
 
 .starlight-aside {
   @apply text-sm;
+}
+
+h1#_top {
+  @apply !font-extrabold;
 }
