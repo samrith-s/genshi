@@ -3,16 +3,45 @@ export enum Dispatcher {
   EFFECT = "effect",
 }
 
+/**
+ * The source of the dispatcher. This is used to track where the dispatcher was dispatched from.
+ */
 export type DispatcherSource = {
+  /**
+   * The name of the source of the effect that dispatched this dispatcher.
+   */
   name: string;
+  /**
+   * The type of the source. This can be either an action or an effect.
+   * Currently, this will always be an effect, since only effects can
+   * dispatch other dispatchers.
+   */
   type: Dispatcher;
 };
 
+/**
+ * The configuration for a dispatcher.
+ */
 export type DispatcherConfig<Handler extends DispatchHandler> = {
+  /**
+   * The store ID that the dispatcher is associated with.
+   */
   storeId: string;
+  /**
+   * The display name of the dispatcher. This is used in history and debugging.
+   */
   displayName: string;
+  /**
+   * The type of dispatcher. This can be either an action or an effect.
+   */
   type: Dispatcher;
+  /**
+   * The handler function that is called when the dispatcher is dispatched.
+   */
   handler: Handler;
+  /**
+   * The source of the dispatcher. This is used to track where the dispatcher was dispatched from.
+   */
   source?: DispatcherSource;
 };
 
@@ -78,12 +107,12 @@ export abstract class BaseDispatcher<
    * Simple wrapper for the handler function to remove the parent dispatcher reference.
    */
   private finalizeHandler(handler: DispatchHandler) {
-    const finalHalder = (...args: Parameters<DispatchHandler>) => {
+    const finalHandler = (...args: Parameters<DispatchHandler>) => {
       this.parent = null;
       return handler(...args);
     };
 
-    return finalHalder as Handler;
+    return finalHandler as Handler;
   }
 
   public get id() {

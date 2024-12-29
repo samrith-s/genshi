@@ -4,8 +4,18 @@ export type EffectHandler<State, Payload> = ({
   dispatch,
   state,
 }: {
+  /**
+   * The `dispatch` function is used to dispatch
+   * other actions or effects.
+   */
   dispatch: Dispatch;
+  /**
+   * The current state of the store.
+   */
   state: State;
+  /**
+   * The payload that was dispatched with the effect.
+   */
   payload: Payload;
 }) => void;
 

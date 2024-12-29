@@ -65,7 +65,7 @@ export abstract class StateManager<State> extends IdManager {
    * the responsibility of the consumer.
    */
   protected setState(state: State) {
-    this.#previousStates.unshift(this.#state);
+    this.#previousStates.unshift(Object.seal(this.#state));
     this.#state = state;
 
     /**
