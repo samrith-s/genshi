@@ -5,7 +5,7 @@ next: false
 sidebar:
   order: 100
 ---
-
+import { PackageManagers } from "starlight-package-managers";
 import { Code, TabItem, Tabs } from "@astrojs/starlight/components";
 
 Genshi is written in TypeScript and can be used with any JavaScript framework or library.
@@ -16,17 +16,7 @@ If you are using a library that is not officially supported, you can still use G
 
 To use Genshi with other libraries, you need to install the core package using your favorite package manager.
 
-<Tabs syncKey="package-manager">
-  <TabItem label="npm">
-    <Code code="npm install @genshi/core" lang="bash" frame="code" />
-  </TabItem>
-  <TabItem label="yarn">
-    <Code code="yarn add @genshi/core" lang="bash" frame="code" />
-  </TabItem>
-  <TabItem label="pnpm">
-    <Code code="pnpm install @genshi/core" lang="bash" frame="code" />
-  </TabItem>
-</Tabs>
+<PackageManagers pkg="@genshi/core" />
 
 ## Usage
 

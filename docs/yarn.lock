@@ -2803,6 +2803,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     sharp: "npm:^0.32.5"
+    starlight-package-managers: "npm:~0.8.1"
     tailwind-merge: "npm:~2.6.0"
     tailwindcss: "npm:^3.4.4"
   languageName: unknown
@@ -6746,6 +6747,15 @@ __metadata:
   dependencies:
     minipass: "npm:^7.0.3"
   checksum: 10c0/caddd5f544b2006e88fa6b0124d8d7b28208b83c72d7672d5ade44d794525d23b540f3396108c4eb9280dcb7c01f0bef50682f5b4b2c34291f7c5e211fd1417d
+  languageName: node
+  linkType: hard
+
+"starlight-package-managers@npm:~0.8.1":
+  version: 0.8.1
+  resolution: "starlight-package-managers@npm:0.8.1"
+  peerDependencies:
+    "@astrojs/starlight": ">=0.22.0"
+  checksum: 10c0/4b41487a4aeab7c67f4b63420d66e01743acea044f3341232a69d80dda01dfbb0bd0c59c556a859a3da46513aa2f1c76d1e0c932d3f05e311cf6d90c1541d800
   languageName: node
   linkType: hard
 

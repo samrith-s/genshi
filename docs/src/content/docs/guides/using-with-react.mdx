@@ -5,6 +5,7 @@ sidebar:
   order: -1
 ---
 
+import { PackageManagers } from "starlight-package-managers";
 import { Code, TabItem, Tabs } from "@astrojs/starlight/components";
 
 Genshi comes with an official React integration that allows you to use Genshi with React.
@@ -13,17 +14,7 @@ Genshi comes with an official React integration that allows you to use Genshi wi
 
 You can install the React integration using your favorite package manager.
 
-<Tabs syncKey="package-manager">
-  <TabItem label="npm">
-    <Code code="npm install @genshi/react" lang="bash" frame="code" />
-  </TabItem>
-  <TabItem label="yarn">
-    <Code code="yarn add @genshi/react" lang="bash" frame="code" />
-  </TabItem>
-  <TabItem label="pnpm">
-    <Code code="pnpm install @genshi/react" lang="bash" frame="code" />
-  </TabItem>
-</Tabs>
+<PackageManagers pkg="@genshi/react" />
 
 ## Usage
 
