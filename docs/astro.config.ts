@@ -4,13 +4,18 @@ import starlight from "@astrojs/starlight";
 import tailwind from "@astrojs/tailwind";
 
 import { defineConfig } from "astro/config";
+import { meta } from "./meta.config";
+
+const SITE = "https://genshi.samrith.dev";
 
 // https://astro.build/config
 export default defineConfig({
+  site: SITE,
   output: "static",
   integrations: [
     starlight({
       title: "Genshi",
+      head: meta(SITE),
       pagination: true,
       titleDelimiter: "/",
       description:

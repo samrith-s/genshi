@@ -1,4 +1,4 @@
-<img src="assets/banner.png" width="100%" alt="Genshi banner" />
+<img src="docs/public/banner.png" width="100%" alt="Genshi banner" />
 
 ## Motivation
 
