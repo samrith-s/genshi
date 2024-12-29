@@ -34,7 +34,7 @@ html {
 }
 
 header.header {
-  @apply border-b border-b-gray-500 border-opacity-20;
+  @apply border-b border-b-gray-500 border-opacity-20 bg-transparent;
 
   .site-title {
     img {
@@ -50,7 +50,12 @@ header.header {
 
 .header,
 [aria-labelledby="starlight__on-this-page--mobile"] {
-  @apply bg-transparent backdrop-blur;
+  @apply backdrop-blur;
+}
+
+[aria-labelledby="starlight__on-this-page--mobile"] {
+  @apply shadow-none;
+  background-color: color-mix(in srgb, var(--sl-color-bg-nav) 70%, transparent);
 }
 
 .sl-steps {
@@ -113,4 +118,8 @@ main.main-pane {
 
 h1#_top {
   @apply !font-extrabold;
+}
+
+code[dir="auto"] {
+  @apply rounded;
 }
