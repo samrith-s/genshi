@@ -3,9 +3,9 @@
 .eslintcache
 
 .rollup.cache
-.yarn/cache
-.yarn/versions
-.yarn/install-state.gz
+**/.yarn/cache
+**/.yarn/versions
+**/.yarn/install-state.gz
 
 lib/
 
