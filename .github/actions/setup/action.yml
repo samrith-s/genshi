@@ -6,6 +6,10 @@ inputs:
     description: "The working directory to run the setup in"
     required: false
     default: "."
+  skip-root-install:
+    description: "Skip installing packages in the root directory"
+    required: false
+    default: "false"
 
 runs:
   using: composite
@@ -23,5 +27,11 @@ runs:
 
     - name: Install dependencies
       shell: bash
+      if: ${{ inputs.skip-root-install != 'true' }}
+      run: yarn install --immutable
+
+    - name: Install sub-dependencies
+      shell: bash
+      if: inputs.working-directory != "."
       working-directory: ${{ inputs.working-directory }}
       run: yarn install --immutable
