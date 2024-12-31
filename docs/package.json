@@ -8,7 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lint": "../node_modules/.bin/eslint --cache --ext .js,.jsx,.ts,.tsx,.astro .",
+    "lint": "../node_modules/.bin/eslint --cache --ext .js,.jsx,.ts,.tsx .",
     "format": "../node_modules/.bin/prettier --cache .",
     "typecheck": "tsc -p ."
   },

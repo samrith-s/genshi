@@ -1,8 +1,8 @@
 {
-  "root": false,
+  "root": true,
   "extends": ["../.eslintrc.json", "plugin:astro/recommended"],
   "parserOptions": {
-    "extraFileExtensions": [".astro", ".json"]
+    "extraFileExtensions": [".json"]
   },
   "overrides": [
     {

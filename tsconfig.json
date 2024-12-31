@@ -1,5 +1,5 @@
 {
-  "include": ["packages/**/*", "**/*.ts", "**/*.tsx"],
+  "include": ["packages/**/*", "**/*.ts", "**/*.tsx", "**/*.json"],
   "exclude": ["node_modules", ".rollup.cache", ".yarn", "lib", "dist"],
   "compilerOptions": {
     "module": "ESNext",
