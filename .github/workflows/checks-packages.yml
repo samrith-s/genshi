@@ -11,6 +11,10 @@ on:
       - "LICENSE"
       - "CODE_OF_CONDUCT.md"
 
+concurrency:
+  group: packages-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   typecheck:
     name: "Typecheck"
