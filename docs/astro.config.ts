@@ -1,10 +1,12 @@
 // @ts-check
-import react from "@astrojs/react";
 import starlight from "@astrojs/starlight";
+
+import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
 import vercelStatic from "@astrojs/vercel/static";
 
 import { defineConfig } from "astro/config";
+
 import { meta } from "./meta.config";
 
 const SITE = "https://genshi.samrith.dev";

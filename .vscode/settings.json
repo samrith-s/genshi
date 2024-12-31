@@ -9,6 +9,14 @@
   "prettier.documentSelectors": ["**/*.astro"],
   "prettier.enable": true,
   "eslint.enable": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "astro",
+    "typescript",
+    "typescriptreact",
+    "json"
+  ],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "files.exclude": {
@@ -17,15 +25,20 @@
     "**/.yarn": true,
     "**/.pnp.*": true,
     "**/.eslintcache": true,
-    "**/.test/**": false,
+    "**/.test/**": true,
     "**/dist/**": true,
+    "**/lib/**": true,
     "**/.parcel-cache/**": true
   },
   "search.exclude": {
+    "**/.git": true,
+    "**/.rollup.cache": true,
     "**/.yarn": true,
     "**/.pnp.*": true,
+    "**/.eslintcache": true,
     "**/.test/**": true,
     "**/dist/**": true,
+    "**/lib/**": true,
     "**/.parcel-cache/**": true
   },
   "cSpell.words": ["Genshi"]

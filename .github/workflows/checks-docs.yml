@@ -1,0 +1,63 @@
+name: Package checks
+
+on:
+  pull_request:
+    branches:
+      - "main"
+    paths-ignore:
+      - "packages/**"
+      - ".vscode/*"
+      - "README.md"
+      - "LICENSE"
+      - "CODE_OF_CONDUCT.md"
+
+jobs:
+  typecheck:
+    name: "Typecheck"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - shell: bash
+        run: yarn workspaces foreach -Ap run typecheck
+
+  lint:
+    name: "Lint"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - shell: bash
+        run: yarn workspaces foreach -Ap run lint
+
+  format:
+    name: "Format"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - shell: bash
+        run: yarn workspaces foreach -Ap run format
+
+  build:
+    name: "Build"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - shell: bash
+        run: yarn workspaces foreach -Ap run build
+
+  tests:
+    name: "Tests"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - shell: bash
+        run: yarn workspaces foreach -Ap run test
