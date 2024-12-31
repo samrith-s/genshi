@@ -17,7 +17,7 @@
     "**/.yarn": true,
     "**/.pnp.*": true,
     "**/.eslintcache": true,
-    "**/.test/**": true,
+    "**/.test/**": false,
     "**/dist/**": true,
     "**/.parcel-cache/**": true
   },

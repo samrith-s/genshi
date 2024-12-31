@@ -31,8 +31,10 @@
   "scripts": {
     "g:publish": "vite-node --script scripts/publish.ts",
     "preinstall": "yarn constraints",
-    "lint": "eslint --cache --fix .",
-    "format": "prettier --write ."
+    "g:lint": "sh scripts/shell/lint.sh",
+    "g:lint:fix": "sh scripts/shell/lint.sh --fix",
+    "g:format": "sh scripts/shell/format.sh",
+    "g:format:write": "sh scripts/shell/lint.sh --write"
   },
   "devDependencies": {
     "@types/fs-extra": "~11",

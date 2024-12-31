@@ -1,5 +1,12 @@
-**/lib
-**/node_modules
-**/.test
-**/.parcel-cache
-**/dist
+**/*.js
+lib/**/*
+node_modules/**/*
+.test/**/*
+.parcel/**/*
+.parcel-cache/**/*
+dist/**/*
+.astro/**/*
+.vercel/**/*
+.test/**/*
+.eslintcache/**/*
+

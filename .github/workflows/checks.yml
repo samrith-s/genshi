@@ -1,0 +1,97 @@
+name: Checks
+
+on:
+  pull_request:
+    branches:
+      - "main"
+
+jobs:
+  typecheck:
+    name: "Typecheck"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "yarn"
+          cache-dependency-path: "**/yarn.lock"
+      - shell: bash
+        run: |
+          corepack enable
+          yarn install --immutable
+      - shell: bash
+        run: yarn workspaces foreach -Ap run typecheck
+
+  lint:
+    name: "Lint"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "yarn"
+          cache-dependency-path: "**/yarn.lock"
+      - shell: bash
+        run: |
+          corepack enable
+          yarn install --immutable
+      - shell: bash
+        run: yarn workspaces foreach -Ap run lint
+
+  format:
+    name: "Format"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "yarn"
+          cache-dependency-path: "**/yarn.lock"
+      - shell: bash
+        run: |
+          corepack enable
+          yarn install --immutable
+      - shell: bash
+        run: yarn workspaces foreach -Ap run format
+
+  build:
+    name: "Build"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "yarn"
+          cache-dependency-path: "**/yarn.lock"
+      - shell: bash
+        run: |
+          corepack enable
+          yarn install --immutable
+      - shell: bash
+        run: yarn workspaces foreach -Ap run build
+
+  tests:
+    name: "Tests"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "yarn"
+          cache-dependency-path: "**/yarn.lock"
+      - shell: bash
+        run: |
+          corepack enable
+          yarn install --immutable
+      - shell: bash
+        run: yarn workspaces foreach -Ap run test

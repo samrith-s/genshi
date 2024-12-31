@@ -2,9 +2,8 @@
 **/node_modules
 **/.test
 **/.parcel-cache
+**/.parcel
 **/dist
-
-node_modules
-.astro
-.yarn
-.vercel
+**/.astro
+**/.vercel
+**/.test

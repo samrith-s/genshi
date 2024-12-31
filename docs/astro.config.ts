@@ -2,6 +2,7 @@
 import react from "@astrojs/react";
 import starlight from "@astrojs/starlight";
 import tailwind from "@astrojs/tailwind";
+import vercelStatic from "@astrojs/vercel/static";
 
 import { defineConfig } from "astro/config";
 import { meta } from "./meta.config";
@@ -12,6 +13,12 @@ const SITE = "https://genshi.samrith.dev";
 export default defineConfig({
   site: SITE,
   output: "static",
+  adapter: vercelStatic({
+    imageService: true,
+    webAnalytics: {
+      enabled: true,
+    },
+  }),
   integrations: [
     starlight({
       title: "Genshi",

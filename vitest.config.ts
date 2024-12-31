@@ -1,22 +1,30 @@
+import { InlineConfig } from "vitest";
 import { defineConfig } from "vitest/config";
+
+const CI = process.env.CI === "true";
+
+const reporters: InlineConfig["reporters"] = [
+  [
+    "default",
+    {
+      outputFile: ".test/test-output.json",
+      includeConsoleOutput: false,
+    },
+  ],
+];
+
+!CI &&
+  reporters.push([
+    "html",
+    {
+      outputFile: ".test/html/index.html",
+    },
+  ]);
 
 export function vitestConfig() {
   return defineConfig({
     test: {
-      reporters: [
-        [
-          "default",
-          {
-            outputFile: ".test/test-output.json",
-          },
-        ],
-        [
-          "html",
-          {
-            outputFile: ".test/html/index.html",
-          },
-        ],
-      ],
+      reporters,
       coverage: {
         provider: "v8",
         include: ["src/**"],
