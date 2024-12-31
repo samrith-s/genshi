@@ -10,6 +10,10 @@ inputs:
     description: "Skip installing packages in the root directory"
     required: false
     default: "false"
+  build-core:
+    description: "Build the core package"
+    required: false
+    default: "false"
 
 runs:
   using: composite
@@ -35,3 +39,8 @@ runs:
       if: ${{ inputs.working-directory != '.' }}
       working-directory: ${{ inputs.working-directory }}
       run: yarn install --immutable
+
+    - name: Build core
+      shell: bash
+      if: ${{ inputs.build-core == 'true' }}
+      run: yarn workspace @genshi/core run build
