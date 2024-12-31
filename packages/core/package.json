@@ -31,7 +31,8 @@
     "publish": "yarn g:publish",
     "dev": "vite build -w",
     "build": "vite build",
-    "lint": "eslint --cache --fix .",
+    "lint": "sh ../../scripts/shell/lint.sh .",
+    "format": "sh ../../scripts/shell/format.sh .",
     "test": "vitest --coverage"
   },
   "devDependencies": {

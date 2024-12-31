@@ -1,0 +1,68 @@
+name: Docs
+
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+    branches:
+      - "main"
+    paths-ignore:
+      - "packages/**"
+      - ".vscode/*"
+      - "README.md"
+      - "LICENSE"
+      - "CODE_OF_CONDUCT.md"
+
+concurrency:
+  group: docs-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  WORKING_DIRECTORY: "docs"
+
+jobs:
+  lint:
+    name: "Lint"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          working-directory: ${{ env.WORKING_DIRECTORY }}
+      - shell: bash
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+        run: yarn lint
+
+  format:
+    name: "Format"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          working-directory: ${{ env.WORKING_DIRECTORY }}
+      - shell: bash
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+        run: yarn format
+
+  build:
+    name: "Build"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          working-directory: ${{ env.WORKING_DIRECTORY }}
+      - shell: bash
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+        run: yarn build

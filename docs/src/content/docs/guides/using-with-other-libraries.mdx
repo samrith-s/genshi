@@ -5,6 +5,7 @@ next: false
 sidebar:
   order: 100
 ---
+
 import { PackageManagers } from "starlight-package-managers";
 import { Code, TabItem, Tabs } from "@astrojs/starlight/components";
 
@@ -62,6 +63,7 @@ const tick = store.effect("tick", ({ dispatch }) => {
   }, 1000);
 });
 ```
+
 The above effect dispatches the `increment` action every second.
 
 ### Using the store in your application

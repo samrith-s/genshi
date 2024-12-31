@@ -1,6 +1,6 @@
 import type { StarlightUserConfig } from "@astrojs/starlight/types";
 
-export const meta: (site: string) => StarlightUserConfig["head"] = (site) => [
+export const meta: (site: string) => StarlightUserConfig["head"] = (_site) => [
   {
     tag: "meta",
     attrs: {

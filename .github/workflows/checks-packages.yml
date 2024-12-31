@@ -1,0 +1,88 @@
+name: Packages
+
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+    branches:
+      - "main"
+    paths-ignore:
+      - "docs/**"
+      - ".vscode/*"
+      - "README.md"
+      - "LICENSE"
+      - "CODE_OF_CONDUCT.md"
+
+concurrency:
+  group: packages-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  typecheck:
+    name: "Typecheck"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          build-core: true
+      - shell: bash
+        run: yarn workspaces foreach -Ap run typecheck
+
+  lint:
+    name: "Lint"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          build-core: true
+      - shell: bash
+        run: yarn workspaces foreach -Ap run lint
+
+  format:
+    name: "Format"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup
+        uses: ./.github/actions/setup
+      - shell: bash
+        run: yarn workspaces foreach -Ap run format
+
+  build:
+    name: "Build"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          build-core: true
+      - shell: bash
+        run: yarn workspaces foreach -Ap run build
+
+  tests:
+    name: "Tests"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          build-core: true
+      - shell: bash
+        run: yarn workspaces foreach -Ap run test

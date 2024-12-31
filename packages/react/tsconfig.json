@@ -1,11 +1,5 @@
 {
   "extends": "../../tsconfig.json",
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "example/**/*.ts",
-    "example/**/*.tsx"
-  ],
   "compilerOptions": {
     "experimentalDecorators": true,
     "jsx": "react-jsx"
