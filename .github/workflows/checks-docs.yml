@@ -1,4 +1,4 @@
-name: Package checks
+name: Docs checks
 
 on:
   pull_request:
