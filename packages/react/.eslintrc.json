@@ -1,4 +1,7 @@
 {
   "root": false,
-  "extends": "../../.eslintrc.json"
+  "extends": "../../.eslintrc.json",
+  "settings": {
+    "import-x/core-modules": ["@genshi/core"]
+  }
 }

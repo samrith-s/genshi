@@ -1,4 +1,5 @@
 import * as Genshi from "@genshi/core";
+
 import { useSyncExternalStore } from "react";
 
 type Store<State> = Genshi.Store<State>;
