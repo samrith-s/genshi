@@ -32,6 +32,6 @@ runs:
 
     - name: Install sub-dependencies
       shell: bash
-      if: inputs.working-directory != "."
+      if: ${{ inputs.working-directory != '.' }}
       working-directory: ${{ inputs.working-directory }}
       run: yarn install --immutable
