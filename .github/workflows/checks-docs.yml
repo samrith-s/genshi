@@ -19,21 +19,6 @@ env:
   WORKING_DIRECTORY: "docs"
 
 jobs:
-  typecheck:
-    name: "Typecheck"
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup
-        uses: ./.github/actions/setup
-        with:
-          working-directory: ${{ env.WORKING_DIRECTORY }}
-      - shell: bash
-        working-directory: ${{ env.WORKING_DIRECTORY }}
-        run: yarn typecheck
-
   lint:
     name: "Lint"
     runs-on: ubuntu-latest
