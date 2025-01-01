@@ -5,6 +5,7 @@
   "author": "Samrith Shankar <samrith.shankar@outlook.com>",
   "license": "MIT",
   "homepage": "https://github.com/samrith-s/genshi#readme",
+  "private": true,
   "type": "module",
   "source": "src/index.ts",
   "module": "lib/index.js",
@@ -59,5 +60,5 @@
     "vite-plugin-dts": "~3.9.1",
     "vitest": "~1.6.0"
   },
-  "packageManager": "yarn@4.5.3"
+  "packageManager": "yarn@4.6.0"
 }

@@ -3,28 +3,19 @@ import starlight from "@astrojs/starlight";
 
 import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
-import vercelStatic from "@astrojs/vercel/static";
+import vercelStatic from "@astrojs/vercel";
 
 import { defineConfig } from "astro/config";
-
-import { meta } from "./meta.config";
 
 const SITE = "https://genshi.samrith.dev";
 
 // https://astro.build/config
 export default defineConfig({
   site: SITE,
-  output: "static",
-  adapter: vercelStatic({
-    imageService: true,
-    webAnalytics: {
-      enabled: true,
-    },
-  }),
   integrations: [
     starlight({
       title: "Genshi",
-      head: meta(SITE),
+      // head: meta(SITE),
       pagination: true,
       titleDelimiter: "/",
       description:
@@ -55,6 +46,9 @@ export default defineConfig({
         },
       ],
       customCss: ["./src/tailwind.css", "@fontsource-variable/inter"],
+      components: {
+        Head: "./src/overrides/head.astro",
+      },
     }),
     tailwind({ applyBaseStyles: false }),
     react(),
