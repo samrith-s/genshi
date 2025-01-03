@@ -29,14 +29,12 @@ First, let's create a store with an initial state.
 ```ts
 import { Store } from "@genshi/core";
 
-const [store, useStore] = new Store({
+const store = new Store({
   count: 0,
 });
 ```
 
-The `createStore` function returns a tuple with an instance of `Store` class and the `useStore` hook.
-
-Now, we can define our actions and effects.
+The `Store` class creates an instance of the store. It also provides methods to define and dispatch actions and effects.
 
 ### Defining actions
 
