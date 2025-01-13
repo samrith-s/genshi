@@ -1,31 +1,12 @@
 {
   "name": "genshi",
   "version": "0.0.0",
-  "description": "A simple and lightweight state management library for React Native",
+  "description": "A simple, composable and effective JavaScript state management library",
   "author": "Samrith Shankar <samrith.shankar@outlook.com>",
   "license": "MIT",
-  "homepage": "https://github.com/samrith-s/genshi#readme",
+  "homepage": "https://genshi.samrith.dev",
   "private": true,
   "type": "module",
-  "source": "src/index.ts",
-  "module": "lib/index.js",
-  "main": "lib/index.cjs",
-  "types": "lib/types/src/index.d.ts",
-  "exports": {
-    "import": "./lib/index.js",
-    "require": "./lib/index.cjs"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/samrith-s/genshi.git"
-  },
-  "bugs": {
-    "url": "https://github.com/samrith-s/genshi/issues"
-  },
-  "files": [
-    "lib",
-    "src"
-  ],
   "workspaces": [
     "packages/*"
   ],

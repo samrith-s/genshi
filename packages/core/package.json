@@ -17,7 +17,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/samrith-s/genshi.git"
+    "url": "https://github.com/samrith-s/genshi.git",
+    "directory": "packages/core"
   },
   "bugs": {
     "url": "https://github.com/samrith-s/genshi/issues"
@@ -43,5 +44,19 @@
     "vite-node": "~1.6.0",
     "vite-plugin-dts": "~3.9.1",
     "vitest": "~1.6.0"
-  }
+  },
+  "keywords": [
+    "state",
+    "management",
+    "library",
+    "genshi",
+    "react",
+    "vue",
+    "angular",
+    "svelte",
+    "javascript",
+    "typescript",
+    "atomic",
+    "composable"
+  ]
 }

@@ -16,7 +16,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/samrith-s/genshi.git"
+    "url": "https://github.com/samrith-s/genshi.git",
+    "directory": "packages/react"
   },
   "bugs": {
     "url": "https://github.com/samrith-s/genshi/issues"
@@ -36,27 +37,41 @@
     "lib"
   ],
   "peerDependencies": {
-    "react": "~18.3.1"
+    "react": ">=18.3.1"
   },
   "dependencies": {
     "@genshi/core": "workspace:~"
   },
   "devDependencies": {
     "@testing-library/dom": "~10.4.0",
-    "@testing-library/react": "~16.0.1",
-    "@types/react": "~18.3.10",
+    "@testing-library/react": ">=16.1.0",
+    "@types/react": ">=18.3.10",
     "@types/react-dom": "~18.3.0",
     "@vitest/coverage-v8": "~1.6.0",
     "@vitest/ui": "~1.6.0",
     "eslint-plugin-react-hooks": "~5.0.0",
     "jsdom": "~25.0.1",
     "parcel": "~2.12.0",
-    "react": "~18.3.1",
-    "react-dom": "~18.3.1",
+    "react": ">=18.3.1",
+    "react-dom": ">=18.3.1",
     "typescript": "~5.4.5",
     "vite": "~5.2.11",
     "vite-node": "~1.6.0",
     "vite-plugin-dts": "~3.9.1",
     "vitest": "~1.6.0"
-  }
+  },
+  "keywords": [
+    "state",
+    "management",
+    "library",
+    "genshi",
+    "react",
+    "vue",
+    "angular",
+    "svelte",
+    "javascript",
+    "typescript",
+    "atomic",
+    "composable"
+  ]
 }

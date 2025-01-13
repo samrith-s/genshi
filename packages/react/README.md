@@ -18,10 +18,3 @@ Genshi has two major packages, for which you can find the relevant API reference
 - [`@genshi/react`](https://genshi.samrith.dev/reference/package-react/) - The official adapter to use Genshi with a React app
 
 Explore [the website](https://genshi.samrith.dev) for full documentation and guides!
-
----
-
-![GitHub branch check runs](https://img.shields.io/github/check-runs/samrith-s/genshi/main)
-[![NPM Version](https://img.shields.io/npm/v/%40genshi%2Fcore?label=core)](https://www.npmjs.com/package/@genshi/core)
-[![NPM Version](https://img.shields.io/npm/v/%40genshi%2Freact?label=react)](https://www.npmjs.com/package/@genshi/react)
-[![npm package minimized gzipped size](https://img.shields.io/bundlejs/size/%40genshi%2Fcore)](https://bundlejs.com/?q=%40genshi%2Fcore)
