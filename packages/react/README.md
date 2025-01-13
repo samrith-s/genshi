@@ -1,4 +1,4 @@
-<img src="docs/public/banner.png" width="100%" alt="Genshi banner" />
+<img src="https://raw.githubusercontent.com/samrith-s/genshi/refs/heads/main/docs/public/banner.png" width="100%" alt="Genshi banner" />
 
 Genshi is a state management library for JavaScript that focuses on being simple, effective and composable. It is designed to be easy to use and understand, while providing the flexibility and power needed to build complex applications.
 
