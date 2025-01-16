@@ -2,6 +2,7 @@
   "include": ["packages/**/*", "**/*.ts", "**/*.tsx", "**/*.json"],
   "exclude": ["node_modules", ".rollup.cache", ".yarn", "lib", "dist"],
   "compilerOptions": {
+    "noEmit": true,
     "module": "ESNext",
     "baseUrl": ".",
     "rootDir": ".",

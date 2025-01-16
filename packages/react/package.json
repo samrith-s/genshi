@@ -11,12 +11,13 @@
   "main": "lib/index.cjs",
   "types": "lib/types/src/index.d.ts",
   "exports": {
+    "types": "./lib/types/src/index.d.ts",
     "import": "./lib/index.js",
     "require": "./lib/index.cjs"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/samrith-s/genshi.git",
+    "url": "git+https://github.com/samrith-s/genshi.git",
     "directory": "packages/react"
   },
   "bugs": {
@@ -28,6 +29,7 @@
     "build": "vite build",
     "lint": "sh ../../scripts/shell/lint.sh .",
     "format": "sh ../../scripts/shell/format.sh .",
+    "typecheck": "sh ../../scripts/shell/typecheck.sh .",
     "test": "vitest --coverage",
     "example": "parcel example/index.html"
   },
