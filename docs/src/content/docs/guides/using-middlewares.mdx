@@ -1,0 +1,65 @@
+---
+title: Using middlewares
+sidebar:
+  order: 3
+  badge:
+    text: New
+    variant: tip
+---
+
+Middlewares are functions that can be used to extend the functionality of the store. They can be used to add additional functionality to the store, such as logging, error handling, or async operations.
+
+Genshi right now only supports middlewares for Actions, but we plan to add support for middlewares for Effects in the future.
+
+:::caution
+The order of the middlewares is important. Middlewares are executed in the order they are defined.
+:::
+
+## Using middlewares with the store
+
+To use middlewares with the store, you need to pass them as an array to the relevant `middlewares` option when creating the store.
+
+```ts ins={"Add the middlewares option":6-11}
+import { Store } from "@genshi/core";
+import { myMiddleware } from "./my-middleware";
+
+const store = new Store(
+  { count: 0 },
+
+  {
+    middlewares: {
+      actions: [myMiddleware],
+    },
+  },
+);
+```
+
+## Custom middlewares
+
+To create a custom action middleware, you can use the `ActionMiddleware` type from the core package.
+
+```ts
+export const myMiddleware: ActionMiddleware = ({ state, handler, payload }) => {
+  Logger.log("Action started", { state, payload });
+  return state;
+};
+```
+
+:::danger
+It is important to return the state value from the middleware. If you don't return anything, the state will be set to `undefined`.
+:::
+
+### Applying actions while passing through a middleware
+
+Another use case is to apply actions while passing through a middleware. This can be done by calling the `handler` function with the state and payload. This is how the Immer middleware works!
+
+```ts {"Pass the payload to the handler even if you don't use it":3-4}
+export const myMiddleware: ActionMiddleware = ({ state, handler, payload }) => {
+  Logger.log("Action started", { state, payload });
+
+  const newState = handler({ state, payload });
+  Logger.log("Action ended", { state: newState, payload });
+
+  return newState;
+};
+```
