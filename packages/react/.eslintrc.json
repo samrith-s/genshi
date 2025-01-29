@@ -2,6 +2,6 @@
   "root": false,
   "extends": "../../.eslintrc.json",
   "settings": {
-    "import-x/core-modules": ["@genshi/core"]
+    "import-x/core-modules": ["@genshi/core", "@genshi/middlewares"]
   }
 }
