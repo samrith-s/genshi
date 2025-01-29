@@ -50,7 +50,7 @@ import { DispatchManager } from "./managers/dispatch-manager";
  * ```
  */
 export class Store<State> extends DispatchManager<State> {
-  constructor(state: State, config?: StoreConfig<State>) {
+  constructor(state: State, config?: StoreConfig) {
     super(state);
     this.setConfig(config || {});
   }

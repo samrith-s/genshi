@@ -13,10 +13,10 @@ import { StoreConfig } from "../config";
  * It is an abstract class as it has no merit on its own. It is meant to be
  * extended by intermediate classes.
  */
-export abstract class ConfigManager<State> {
+export abstract class ConfigManager {
   readonly #id: string;
   #name = "";
-  #config: Omit<StoreConfig<State>, "name"> = {};
+  #config: Omit<StoreConfig, "name"> = {};
 
   static #counter = 0;
 
@@ -24,7 +24,7 @@ export abstract class ConfigManager<State> {
     this.#id = `store-${(ConfigManager.#counter++).toString().padStart(4, "0")}`;
   }
 
-  protected setConfig(config: StoreConfig<State>) {
+  protected setConfig(config: StoreConfig) {
     if (config.name) {
       this.#name = config.name;
     }
@@ -59,7 +59,7 @@ export abstract class ConfigManager<State> {
     return this.#config;
   }
 
-  public set config(_value: StoreConfig<State>) {
+  public set config(_value: StoreConfig) {
     throw new Error("Cannot set 'config' for store after creation");
   }
 }

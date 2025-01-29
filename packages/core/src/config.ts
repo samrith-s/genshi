@@ -1,18 +1,23 @@
 import type { ActionHandler } from "./dispatchers/action-dispatcher";
 
-export type ActionMiddleware<State> = ({
+/**
+ * Description of an action middleware.
+ *
+ * @todo(@samrith-s) Maybe harmonize this with {@link ActionHandler}?
+ */
+export type ActionMiddleware = ({
   state,
   handler,
   payload,
 }: {
-  state: State;
-  handler: ActionHandler<State, unknown>;
+  state: unknown;
+  handler: ActionHandler<unknown, unknown>;
   payload: unknown;
-}) => State;
+}) => unknown;
 
-export type StoreConfig<State> = {
+export type StoreConfig = {
   name?: string;
   middlewares?: {
-    action?: ActionMiddleware<State>[];
+    action?: ActionMiddleware[];
   };
 };

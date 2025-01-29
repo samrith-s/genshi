@@ -6,7 +6,7 @@ import { ConfigManager } from "./config-manager";
  * It is an abstract class as it has no merit on its own. It is meant to be
  * extended and provides the necessary methods to interact with the state.
  */
-export abstract class StateManager<State> extends ConfigManager<State> {
+export abstract class StateManager<State> extends ConfigManager {
   /**
    * Only mutate this directly within `setState` method. Otherwise
    */

@@ -87,8 +87,12 @@ export abstract class DispatchManager<State> extends HistoryManager<State> {
         this.setState(
           middlewares.length
             ? middlewares.reduce(
-                (acc, middleware) =>
-                  middleware({ state: acc, handler: actionHandler, payload }),
+                (acc: State, middleware) =>
+                  middleware({
+                    state: acc,
+                    handler: actionHandler as ActionHandler<unknown, unknown>,
+                    payload,
+                  }) as State,
                 this.state
               )
             : actionHandler({

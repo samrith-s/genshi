@@ -60,7 +60,7 @@ function createSnapshot<S>(store: Store<S>) {
  */
 export function createStore<State = unknown>(
   initialState: State,
-  config?: Genshi.StoreConfig<State>
+  config?: Genshi.StoreConfig
 ) {
   const store = new Genshi.Store<State>(initialState, config);
 
