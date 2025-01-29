@@ -36,18 +36,18 @@
     "test": "vitest --coverage"
   },
   "devDependencies": {
-    "@vitest/coverage-v8": "~1.6.0",
-    "@vitest/ui": "~1.6.0",
-    "immer": "~10.1.1",
-    "typescript": "~5.4.5",
-    "vite": "~5.2.11",
-    "vite-node": "~1.6.0",
-    "vite-plugin-dts": "~3.9.1",
-    "vitest": "~1.6.0"
+    "@vitest/coverage-v8": "1.6.0",
+    "@vitest/ui": "1.6.0",
+    "immer": "10.1.1",
+    "typescript": "5.4.5",
+    "vite": "5.2.11",
+    "vite-node": "1.6.0",
+    "vite-plugin-dts": "3.9.1",
+    "vitest": "1.6.0"
   },
   "peerDependencies": {
-    "@genshi/core": ">=1.0.3",
-    "immer": ">=10.0.0"
+    "@genshi/core": ">=1.1.0",
+    "immer": ">=10.x"
   },
   "peerDependenciesMeta": {
     "immer": {

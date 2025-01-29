@@ -34,13 +34,13 @@
   },
   "devDependencies": {
     "@genshi/core": "workspace:~",
-    "@vitest/coverage-v8": "~1.6.0",
-    "@vitest/ui": "~1.6.0",
-    "typescript": "~5.4.5",
-    "vite": "~5.2.11",
-    "vite-node": "~1.6.0",
-    "vite-plugin-dts": "~3.9.1",
-    "vitest": "~1.6.0"
+    "@vitest/coverage-v8": "1.6.0",
+    "@vitest/ui": "1.6.0",
+    "typescript": "5.4.5",
+    "vite": "5.2.11",
+    "vite-node": "1.6.0",
+    "vite-plugin-dts": "3.9.1",
+    "vitest": "1.6.0"
   },
   "keywords": [
     "state",
