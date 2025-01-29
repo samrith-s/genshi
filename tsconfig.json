@@ -17,11 +17,9 @@
     "incremental": true,
     "checkJs": true,
     "resolveJsonModule": true,
-    "composite": true,
-    "declaration": true,
+    "declaration": false,
     "outDir": "lib",
-    "declarationDir": "lib/types",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "target": "ESNext",
     "jsx": "react"
   }

@@ -445,6 +445,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@genshi/core@workspace:packages/core"
   dependencies:
+    "@genshi/core": "workspace:~"
     "@vitest/coverage-v8": "npm:~1.6.0"
     "@vitest/ui": "npm:~1.6.0"
     typescript: "npm:~5.4.5"
@@ -455,11 +456,33 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@genshi/middlewares@workspace:packages/middlewares, @genshi/middlewares@workspace:~":
+  version: 0.0.0-use.local
+  resolution: "@genshi/middlewares@workspace:packages/middlewares"
+  dependencies:
+    "@vitest/coverage-v8": "npm:~1.6.0"
+    "@vitest/ui": "npm:~1.6.0"
+    immer: "npm:~10.1.1"
+    typescript: "npm:~5.4.5"
+    vite: "npm:~5.2.11"
+    vite-node: "npm:~1.6.0"
+    vite-plugin-dts: "npm:~3.9.1"
+    vitest: "npm:~1.6.0"
+  peerDependencies:
+    "@genshi/core": ">=1.0.3"
+    immer: ">=10.0.0"
+  peerDependenciesMeta:
+    immer:
+      optional: true
+  languageName: unknown
+  linkType: soft
+
 "@genshi/react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "@genshi/react@workspace:packages/react"
   dependencies:
     "@genshi/core": "workspace:~"
+    "@genshi/middlewares": "workspace:~"
     "@testing-library/dom": "npm:~10.4.0"
     "@testing-library/react": "npm:>=16.1.0"
     "@types/react": "npm:>=18.3.10"
@@ -467,6 +490,7 @@ __metadata:
     "@vitest/coverage-v8": "npm:~1.6.0"
     "@vitest/ui": "npm:~1.6.0"
     eslint-plugin-react-hooks: "npm:~5.0.0"
+    immer: "npm:~10.1.1"
     jsdom: "npm:~25.0.1"
     parcel: "npm:~2.12.0"
     react: "npm:>=18.3.1"
@@ -3915,6 +3939,7 @@ __metadata:
     "@types/fs-extra": "npm:~11"
     "@types/minimist": "npm:~1"
     "@types/node": "npm:~20.12.11"
+    "@types/react": "npm:>=18.3.10"
     "@typescript-eslint/eslint-plugin": "npm:~7.8.0"
     "@typescript-eslint/parser": "npm:~7.8.0"
     "@vitest/coverage-v8": "npm:~1.6.0"
@@ -3928,6 +3953,7 @@ __metadata:
     fs-extra: "npm:~11.2.0"
     minimist: "npm:~1.2.8"
     prettier: "npm:~3.2.5"
+    react: "npm:>=18.3.1"
     typescript: "npm:~5.4.5"
     vite: "npm:~5.2.11"
     vite-node: "npm:~1.6.0"
@@ -4188,6 +4214,13 @@ __metadata:
   version: 5.3.2
   resolution: "ignore@npm:5.3.2"
   checksum: 10c0/f9f652c957983634ded1e7f02da3b559a0d4cc210fca3792cb67f1b153623c9c42efdc1c4121af171e295444459fc4a9201101fb041b1104a3c000bccb188337
+  languageName: node
+  linkType: hard
+
+"immer@npm:~10.1.1":
+  version: 10.1.1
+  resolution: "immer@npm:10.1.1"
+  checksum: 10c0/b749e10d137ccae91788f41bd57e9387f32ea6d6ea8fd7eb47b23fd7766681575efc7f86ceef7fe24c3bc9d61e38ff5d2f49c2663b2b0c056e280a4510923653
   languageName: node
   linkType: hard
 

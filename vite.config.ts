@@ -1,16 +1,17 @@
-/* eslint-disable no-undef */
-import { resolve } from "path";
-
 import { defineConfig, UserConfig } from "vite";
 import dtsPlugin from "vite-plugin-dts";
 
-export function viteConfig(path: string[], config?: UserConfig) {
+export function viteConfig(
+  config: Partial<UserConfig> & {
+    entry: Record<string, string> | string[] | string;
+  }
+) {
   return defineConfig({
     plugins: [
       dtsPlugin({
-        insertTypesEntry: true,
-        outDir: "lib/types",
-        include: ["src/**/*.ts", "src/**/*.tsx", "../core/src/**/*.ts"],
+        entryRoot: "./src",
+        outDir: "./lib/types",
+        include: ["src/**/*.ts", "src/**/*.tsx"],
         exclude: ["**/__tests__", "**/example"],
       }),
       ...(config?.plugins || []),
@@ -40,12 +41,20 @@ export function viteConfig(path: string[], config?: UserConfig) {
       lib: {
         name: "Genshi",
         formats: ["es", "cjs"],
-        fileName: "index",
+        fileName:
+          typeof config.entry === "object"
+            ? (format, entryName) =>
+                `${entryName}/index.${format == "es" ? "js" : format}`
+            : undefined,
         ...config?.build?.lib,
-        entry: resolve(...path),
+        entry: config.entry,
       },
     },
   });
 }
 
-export default viteConfig([]);
+export default viteConfig({
+  entry: {
+    index: "",
+  },
+});

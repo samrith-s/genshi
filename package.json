@@ -12,16 +12,13 @@
   ],
   "scripts": {
     "g:publish": "vite-node --script scripts/publish.ts",
-    "preinstall": "yarn constraints",
-    "g:lint": "sh scripts/shell/lint.sh",
-    "g:lint:fix": "sh scripts/shell/lint.sh --fix",
-    "g:format": "sh scripts/shell/format.sh",
-    "g:format:write": "sh scripts/shell/lint.sh --write"
+    "preinstall": "yarn constraints"
   },
   "devDependencies": {
     "@types/fs-extra": "~11",
     "@types/minimist": "~1",
     "@types/node": "~20.12.11",
+    "@types/react": ">=18.3.10",
     "@typescript-eslint/eslint-plugin": "~7.8.0",
     "@typescript-eslint/parser": "~7.8.0",
     "@vitest/coverage-v8": "~1.6.0",
@@ -35,11 +32,15 @@
     "fs-extra": "~11.2.0",
     "minimist": "~1.2.8",
     "prettier": "~3.2.5",
+    "react": ">=18.3.1",
     "typescript": "~5.4.5",
     "vite": "~5.2.11",
     "vite-node": "~1.6.0",
     "vite-plugin-dts": "~3.9.1",
     "vitest": "~1.6.0"
   },
-  "packageManager": "yarn@4.6.0"
+  "packageManager": "yarn@4.6.0",
+  "@parcel/resolver-default": {
+    "packageExports": true
+  }
 }

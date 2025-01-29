@@ -15,12 +15,12 @@
  * Between the root and terminal classes, there can be any number of intermediate classes.
  * But apart from the terminal class, all the classes are expected to be abstract.
  *
- * `IdManager` is the root class, and `Store` is the terminal class. All the classes
+ * `ConfigManager` is the root class, and `Store` is the terminal class. All the classes
  * apart from the terminal class are expected to be abstract.
  *
- * All the classes between `IdManager` and `Store` are intermediate classes. If any new
+ * All the classes between `ConfigManager` and `Store` are intermediate classes. If any new
  * functionality is to be added, there are three considerations:
- * 1. If the functionality is related to identity management, it should be in the `IdManager` class
+ * 1. If the functionality is related to config management, it should be in the `ConfigManager` class
  * 2. The `Store` class should be as light-weight as possible and only expose methods that are
  *  necessary for the consumer.
  * 3. Any new functionality for which an intermediary class doesn't exist, should go in its
@@ -36,9 +36,10 @@
  * inherit the `LoggerManager` class, and so on.
  */
 
-import { DispatchManager } from "./DispatchManager";
-import { Action, ActionHandler } from "./Dispatchers/ActionDispatcher";
-import { Effect, EffectHandler } from "./Dispatchers/EffectDispatcher";
+import { StoreConfig } from "./config";
+import { Action, ActionHandler } from "./dispatchers/action-dispatcher";
+import { Effect, EffectHandler } from "./dispatchers/effect-dispatcher";
+import { DispatchManager } from "./managers/dispatch-manager";
 
 /**
  * The `Store` class allows you to create a store. It is a
@@ -49,11 +50,9 @@ import { Effect, EffectHandler } from "./Dispatchers/EffectDispatcher";
  * ```
  */
 export class Store<State> extends DispatchManager<State> {
-  constructor(state: State, name?: string) {
+  constructor(state: State, config?: StoreConfig<State>) {
     super(state);
-    if (name) {
-      this.setName(name);
-    }
+    this.setConfig(config || {});
   }
 
   /**
