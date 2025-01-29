@@ -2,10 +2,11 @@ import {
   Dispatch,
   Dispatcher,
   DispatchHandler,
-} from "./Dispatchers/@BaseDispatcher";
-import { ActionHandler } from "./Dispatchers/ActionDispatcher";
-import { EffectHandler } from "./Dispatchers/EffectDispatcher";
-import { HistoryManager } from "./HistoryManager";
+} from "../dispatchers/@base-dispatcher";
+import { ActionHandler } from "../dispatchers/action-dispatcher";
+import { EffectHandler } from "../dispatchers/effect-dispatcher";
+
+import { HistoryManager } from "./history-manager";
 
 /**
  * The `DispatchManager` class manages the various dispatchers (Actions, Effects)
@@ -81,12 +82,19 @@ export abstract class DispatchManager<State> extends HistoryManager<State> {
          * we get the correct type for the arguments it accepts.
          */
         const actionHandler = handler as ActionHandler<State, typeof payload>;
+        const middlewares = this.config?.middlewares?.action || [];
 
         this.setState(
-          actionHandler({
-            state: this.state,
-            payload,
-          })
+          middlewares.length
+            ? middlewares.reduce(
+                (acc, middleware) =>
+                  middleware({ state: acc, handler: actionHandler, payload }),
+                this.state
+              )
+            : actionHandler({
+                state: this.state,
+                payload,
+              })
         );
 
         this.traceEnd(trace);

@@ -1,7 +1,9 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { Dispatcher } from "../Dispatchers/@BaseDispatcher";
-import { Store } from "../Store";
+import { ActionMiddleware } from "../config";
+import { Dispatcher } from "../dispatchers/@base-dispatcher";
+import { ActionHandler } from "../dispatchers/action-dispatcher";
+import { Store } from "../store";
 
 describe("store", () => {
   it("should create store", () => {
@@ -10,7 +12,9 @@ describe("store", () => {
   });
 
   it("should set the name of the store", () => {
-    const store = new Store(100, "hey");
+    const store = new Store(100, {
+      name: "hey",
+    });
     expect(store.tag).toBe("hey");
   });
 
@@ -53,7 +57,10 @@ describe("store", () => {
   });
 
   it("should throw while setting immutable properties after creation", () => {
-    const store = new Store(100, "hey");
+    const config = {
+      name: "hey",
+    };
+    const store = new Store(100, config);
 
     expect(store.name).toBe("hey");
     expect(() => (store.name = "new")).toThrow();
@@ -63,5 +70,44 @@ describe("store", () => {
 
     expect(store.id).toBe(store.id);
     expect(() => (store.id = "new")).toThrow();
+
+    expect(store.config).toEqual(config);
+    expect(() => (store.config = config)).toThrow();
+  });
+
+  it("should support middlewares", () => {
+    const handlers: ActionHandler<number, undefined>[] = [];
+
+    const middlewares = Array.from({ length: 10 }).map(() =>
+      vi.fn().mockImplementation(({ state, handler }) => {
+        handlers.push(handler);
+        return state + 1;
+      })
+    ) as ActionMiddleware<number>[];
+
+    const lastMiddleware: ActionMiddleware<number> = ({ state, handler }) =>
+      handler({ state, payload: undefined });
+
+    const store = new Store(0, {
+      middlewares: {
+        action: [...middlewares, lastMiddleware],
+      },
+    });
+
+    const action = store.action("increment", ({ state }) => state + 100);
+
+    expect(store.getState()).toBe(0);
+
+    store.dispatch(action);
+
+    expect(store.getState()).toBe(110);
+
+    middlewares.forEach((middleware, index) => {
+      expect(middleware).toHaveBeenCalledOnce();
+      expect(middleware).toHaveBeenCalledWith({
+        state: index,
+        handler: handlers[index],
+      });
+    });
   });
 });

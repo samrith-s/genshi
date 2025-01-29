@@ -3,8 +3,9 @@ import {
   AnyDispatcher,
   Dispatcher,
   DispatchHandler,
-} from "./Dispatchers/@BaseDispatcher";
-import { StateManager } from "./StateManager";
+} from "../dispatchers/@base-dispatcher";
+
+import { StateManager } from "./state-manager";
 
 /**
  * The `HandlerManager` class manages the various dispatchers (Actions, Effects)

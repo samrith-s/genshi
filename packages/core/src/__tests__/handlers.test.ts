@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { BaseDispatcher, Dispatcher } from "../Dispatchers/@BaseDispatcher";
-import { Action } from "../Dispatchers/ActionDispatcher";
-import { Store } from "../Store";
+import { BaseDispatcher, Dispatcher } from "../dispatchers/@base-dispatcher";
+import { Action } from "../dispatchers/action-dispatcher";
+import { Store } from "../store";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 class Dummy extends BaseDispatcher<Dispatcher.ACTION, any> {}

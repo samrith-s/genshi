@@ -1,4 +1,4 @@
-import { BaseDispatcher, Dispatch, Dispatcher } from "./@BaseDispatcher";
+import { BaseDispatcher, Dispatch, Dispatcher } from "./@base-dispatcher";
 
 export type EffectHandler<State, Payload> = ({
   dispatch,

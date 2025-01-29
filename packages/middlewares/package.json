@@ -1,15 +1,11 @@
 {
-  "name": "@genshi/core",
-  "version": "1.0.3",
+  "name": "@genshi/middlewares",
+  "version": "1.0.0",
   "description": "A simple, composable and effective JavaScript state management library",
   "author": "Samrith Shankar <samrith.shankar@outlook.com>",
   "license": "MIT",
   "homepage": "https://genshi.samrith.dev",
   "type": "module",
-  "source": "src/index.ts",
-  "module": "lib/core.js",
-  "main": "lib/core.cjs",
-  "types": "lib/types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/samrith-s/genshi.git",
@@ -23,6 +19,13 @@
     "LICENSE",
     "lib"
   ],
+  "exports": {
+    "./immer": {
+      "import": "./lib/immer/index.js",
+      "require": "./lib/immer/index.cjs",
+      "types": "./lib/types/immer.d.ts"
+    }
+  },
   "scripts": {
     "publish": "yarn g:publish",
     "dev": "vite build -w",
@@ -33,14 +36,23 @@
     "test": "vitest --coverage"
   },
   "devDependencies": {
-    "@genshi/core": "workspace:~",
     "@vitest/coverage-v8": "~1.6.0",
     "@vitest/ui": "~1.6.0",
+    "immer": "~10.1.1",
     "typescript": "~5.4.5",
     "vite": "~5.2.11",
     "vite-node": "~1.6.0",
     "vite-plugin-dts": "~3.9.1",
     "vitest": "~1.6.0"
+  },
+  "peerDependencies": {
+    "@genshi/core": ">=1.0.3",
+    "immer": ">=10.0.0"
+  },
+  "peerDependenciesMeta": {
+    "immer": {
+      "optional": true
+    }
   },
   "keywords": [
     "state",
