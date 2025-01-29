@@ -83,9 +83,9 @@ describe("store", () => {
         handlers.push(handler);
         return state + 1;
       })
-    ) as ActionMiddleware<number>[];
+    ) as ActionMiddleware[];
 
-    const lastMiddleware: ActionMiddleware<number> = ({ state, handler }) =>
+    const lastMiddleware: ActionMiddleware = ({ state, handler }) =>
       handler({ state, payload: undefined });
 
     const store = new Store(0, {
