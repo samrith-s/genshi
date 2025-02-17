@@ -11,7 +11,7 @@ describe("immer middleware", () => {
       },
       {
         middlewares: {
-          action: [immer()],
+          action: [immer],
         },
       }
     );

@@ -3,6 +3,7 @@ import { BaseDispatcher, Dispatch, Dispatcher } from "./@base-dispatcher";
 export type EffectHandler<State, Payload> = ({
   dispatch,
   state,
+  payload,
 }: {
   /**
    * The `dispatch` function is used to dispatch

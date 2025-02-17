@@ -20,15 +20,23 @@ import { produce } from "immer";
  * });
  * ```
  */
-export function immer() {
-  const override: ActionMiddleware = ({ state, handler, payload }) => {
-    return produce(state, (draft) => {
-      handler({
-        state: draft as typeof state,
-        payload,
-      });
+export const immer: ActionMiddleware = ({ state, handler, payload }) => {
+  return produce(state, (draft) => {
+    handler({
+      state: draft as typeof state,
+      payload,
     });
-  };
+  });
+};
+// export function immer() {
+//   const override: ActionMiddleware = ({ state, handler, payload }) => {
+//     return produce(state, (draft) => {
+//       handler({
+//         state: draft as typeof state,
+//         payload,
+//       });
+//     });
+//   };
 
-  return override;
-}
+//   return override;
+// }

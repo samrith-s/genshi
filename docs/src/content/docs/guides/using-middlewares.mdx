@@ -7,9 +7,15 @@ sidebar:
     variant: tip
 ---
 
-Middlewares are functions that can be used to extend the functionality of the store. They can be used to add additional functionality to the store, such as logging, error handling, or async operations.
+import {
+  CardGrid,
+  Code,
+  Steps,
+  Tabs,
+  TabItem,
+} from "@astrojs/starlight/components";
 
-Genshi right now only supports middlewares for Actions, but we plan to add support for middlewares for Effects in the future.
+Middlewares are functions that can be used to extend the functionality of the store. They can be used to add additional functionality to the store, such as logging, error handling, or async operations.
 
 :::caution
 The order of the middlewares is important. Middlewares are executed in the order they are defined.
@@ -19,47 +25,143 @@ The order of the middlewares is important. Middlewares are executed in the order
 
 To use middlewares with the store, you need to pass them as an array to the relevant `middlewares` option when creating the store.
 
-```ts ins={"Add the middlewares option":6-11}
+```ts ins={"Add the middlewares option":8-14}
 import { Store } from "@genshi/core";
-import { myMiddleware } from "./my-middleware";
+
+import { myActionMiddleware } from "./my-action-middleware";
+import { myEffectMiddleware } from "./my-effect-middleware";
 
 const store = new Store(
   { count: 0 },
 
   {
     middlewares: {
-      actions: [myMiddleware],
+      actions: [myActionMiddleware],
+      effects: [myEffectMiddleware],
     },
   },
 );
 ```
 
+## Official middlewares
+
+Genshi provides only one official middleware - Immer.
+
+### Immer
+
+[Immer](https://immerjs.github.io/) is a powerful library that lets you write immutable updates to the state in a mutable way.
+
+To use Immer with Genshi, you need to pass the middleware to the `middlewares` option when creating the store. To get started with Immer:
+
+<Steps>
+
+1. First, install the middlewares package:
+
+   <Tabs syncKey="package-manager">
+     <TabItem label="npm">
+       <Code code="npm install @genshi/middlewares" lang="bash" frame="code" />
+     </TabItem>
+     <TabItem label="yarn">
+       <Code code="yarn add @genshi/middlewares" lang="bash" frame="code" />
+     </TabItem>
+     <TabItem label="pnpm">
+       <Code code="pnpm install @genshi/middlewares" lang="bash" frame="code" />
+     </TabItem>
+   </Tabs>
+
+2. Pass the Immer middleware to the store:
+
+   ```ts
+   import { Store } from "@genshi/core";
+   import { immer } from "@genshi/middlewares/immer";
+
+   const store = new Store(
+     { count: 0 },
+     {
+       middlewares: {
+         actions: [immer],
+       },
+     },
+   );
+   ```
+
+</Steps>
+
 ## Custom middlewares
 
-To create a custom action middleware, you can use the `ActionMiddleware` type from the core package.
+Genshi allows you to use both create and use both action and effect middlewares.
 
-```ts
-export const myMiddleware: ActionMiddleware = ({ state, handler, payload }) => {
-  Logger.log("Action started", { state, payload });
-  return state;
-};
-```
+### Custom action middleware
+
+To create a custom action middleware, you can use the `ActionMiddleware` type from the core package.
 
 :::danger
 It is important to return the state value from the middleware. If you don't return anything, the state will be set to `undefined`.
 :::
 
-### Applying actions while passing through a middleware
+```ts
+export const myActionMiddleware: ActionMiddleware = ({
+  state,
+  handler,
+  payload,
+}) => {
+  Logger.log("Action started", { state, payload });
+  return state;
+};
+```
 
-Another use case is to apply actions while passing through a middleware. This can be done by calling the `handler` function with the state and payload. This is how the Immer middleware works!
+#### Applying the action while passing through a middleware
+
+A common use case is to apply the action while passing through a middleware. This can be done by calling the `handler` function with the state and payload. This is how the Immer middleware works!
 
 ```ts {"Pass the payload to the handler even if you don't use it":3-4}
-export const myMiddleware: ActionMiddleware = ({ state, handler, payload }) => {
+export const myActionMiddleware: ActionMiddleware = ({
+  state,
+  handler,
+  payload,
+}) => {
   Logger.log("Action started", { state, payload });
 
   const newState = handler({ state, payload });
   Logger.log("Action ended", { state: newState, payload });
 
   return newState;
+};
+```
+
+### Custom effect middleware
+
+To create a custom effect middleware, you can use the `EffectMiddleware` type from the core package.
+
+```ts
+export const myEffectMiddleware: EffectMiddleware = ({
+  state,
+  handler,
+  payload,
+  dispatch,
+}) => {
+  Logger.log("Action started", { state, payload });
+};
+```
+
+#### Applying the effect while passing through a middleware
+
+Similar to actions, a common use case is to apply the effect while passing through a middleware. This can be done by calling the `handler` function with the state, payload, and dispatch function.
+
+:::danger
+It is important to pass the `dispatch` function to the handler. If you don't pass it, the effect registered with the store will not be able to dispatch actions.
+:::
+
+```ts {"Pass the payload to the handler even if you don't use it":3-4}
+export const myEffectMiddleware: EffectMiddleware = ({
+  state,
+  handler,
+  payload,
+  dispatch,
+}) => {
+  Logger.log("Effect started", { state, payload });
+
+  handler({ state, payload, dispatch });
+  Logger.log("Effect ended", { state, payload });
 };
 ```

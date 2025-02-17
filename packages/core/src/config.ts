@@ -27,6 +27,7 @@ export type EffectMiddleware = <State = any, Payload = any>({
   state,
   handler,
   payload,
+  dispatch,
 }: {
   state: State;
   handler: EffectHandler<State, Payload>;
