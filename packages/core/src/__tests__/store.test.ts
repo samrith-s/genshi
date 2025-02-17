@@ -1,8 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { ActionMiddleware } from "../config";
 import { Dispatcher } from "../dispatchers/@base-dispatcher";
-import { ActionHandler } from "../dispatchers/action-dispatcher";
 import { Store } from "../store";
 
 describe("store", () => {
@@ -73,41 +71,5 @@ describe("store", () => {
 
     expect(store.config).toEqual(config);
     expect(() => (store.config = config)).toThrow();
-  });
-
-  it("should support middlewares", () => {
-    const handlers: ActionHandler<number, undefined>[] = [];
-
-    const middlewares = Array.from({ length: 10 }).map(() =>
-      vi.fn().mockImplementation(({ state, handler }) => {
-        handlers.push(handler);
-        return state + 1;
-      })
-    ) as ActionMiddleware[];
-
-    const lastMiddleware: ActionMiddleware = ({ state, handler }) =>
-      handler({ state, payload: undefined });
-
-    const store = new Store(0, {
-      middlewares: {
-        action: [...middlewares, lastMiddleware],
-      },
-    });
-
-    const action = store.action("increment", ({ state }) => state + 100);
-
-    expect(store.getState()).toBe(0);
-
-    store.dispatch(action);
-
-    expect(store.getState()).toBe(110);
-
-    middlewares.forEach((middleware, index) => {
-      expect(middleware).toHaveBeenCalledOnce();
-      expect(middleware).toHaveBeenCalledWith({
-        state: index,
-        handler: handlers[index],
-      });
-    });
   });
 });

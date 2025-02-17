@@ -16,7 +16,7 @@ import { StoreConfig } from "../config";
 export abstract class ConfigManager {
   readonly #id: string;
   #name = "";
-  #config: Omit<StoreConfig, "name"> = {};
+  #config = {} as StoreConfig;
 
   static #counter = 0;
 

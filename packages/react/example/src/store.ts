@@ -1,3 +1,4 @@
+// eslint-disable-next-line import-x/no-unresolved
 import { immer } from "@genshi/middlewares/immer";
 
 import { createStore } from "../../src/create-store";

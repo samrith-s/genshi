@@ -53,6 +53,7 @@ export class Store<State> extends DispatchManager<State> {
   constructor(state: State, config?: StoreConfig) {
     super(state);
     this.setConfig(config || {});
+    this.collectMiddlewares(this.config);
   }
 
   /**
