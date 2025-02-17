@@ -1,5 +1,6 @@
-import { Dispatcher, DispatchHandler } from "./Dispatchers/@BaseDispatcher";
-import { HandlerManager } from "./HandlerManager";
+import { Dispatcher, DispatchHandler } from "../dispatchers/@base-dispatcher";
+
+import { HandlerManager } from "./handler-manager";
 
 export type History<State> = {
   id: string;

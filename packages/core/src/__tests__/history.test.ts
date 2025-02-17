@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { Dispatcher } from "../Dispatchers/@BaseDispatcher";
-import { HistoryManager } from "../HistoryManager";
-import { Store } from "../Store";
+import { Dispatcher } from "../dispatchers/@base-dispatcher";
+import { HistoryManager } from "../managers/history-manager";
+import { Store } from "../store";
 
 describe("history", () => {
   it("should show mark whether the dispatch is global or not correctly", () => {

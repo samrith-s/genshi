@@ -1,4 +1,5 @@
-export * from "./Store";
-export type * from "./Dispatchers/@BaseDispatcher";
-export type * from "./Dispatchers/ActionDispatcher";
-export type * from "./Dispatchers/EffectDispatcher";
+export * from "./config";
+export * from "./store";
+export type * from "./dispatchers/@base-dispatcher";
+export type * from "./dispatchers/action-dispatcher";
+export type * from "./dispatchers/effect-dispatcher";

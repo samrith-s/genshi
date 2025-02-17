@@ -1,4 +1,4 @@
-import { IdManager } from "./IdManager";
+import { ConfigManager } from "./config-manager";
 
 /**
  * The `StateManager` class is the only class that should be used to interact with the state.
@@ -6,7 +6,7 @@ import { IdManager } from "./IdManager";
  * It is an abstract class as it has no merit on its own. It is meant to be
  * extended and provides the necessary methods to interact with the state.
  */
-export abstract class StateManager<State> extends IdManager {
+export abstract class StateManager<State> extends ConfigManager {
   /**
    * Only mutate this directly within `setState` method. Otherwise
    */
@@ -83,7 +83,7 @@ export abstract class StateManager<State> extends IdManager {
      *
      * @todo(samrith-s): Is this really necessary?
      */
-    return Object.seal(this.#state);
+    return this.#state;
   }
 
   /**

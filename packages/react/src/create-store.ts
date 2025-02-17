@@ -58,11 +58,11 @@ function createSnapshot<S>(store: Store<S>) {
  *
  * ```
  */
-export function createStore<State = unknown>(
+export function createStore<State>(
   initialState: State,
-  name?: string
+  config?: Genshi.StoreConfig
 ) {
-  const store = new Genshi.Store<State>(initialState, name);
+  const store = new Genshi.Store<State>(initialState, config);
 
   const subscriber = createSubscriber<State>(store);
   const getSnapshot = createSnapshot<State>(store);

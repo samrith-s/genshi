@@ -4,6 +4,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 // @ts-check
 
+const semver = require("semver");
+
 const { defineConfig } = require(`@yarnpkg/types`);
 /** @type {import('./package.json') & { devDependencies?: Record<string, string>, dependencies?: Record<string, string>, peerDependencies?: Record<string, string> }} */
 const pkg = require("./package.json");
@@ -30,8 +32,13 @@ const config = defineConfig({
               (d) => d.ident === dep.ident && d.type === "peerDependencies"
             )?.range;
 
-            if (peerVersion) {
-              dep.update(peerVersion);
+            if (peerVersion && !semver.satisfies(dep.range, peerVersion)) {
+              const newPeerVersion = semver
+                .minVersion(peerVersion, {
+                  loose: true,
+                })
+                ?.format();
+              dep.update(newPeerVersion || "");
               continue;
             }
           }

@@ -27,8 +27,8 @@
     "**/.eslintcache": true,
     "**/.test/**": true,
     "**/dist/**": true,
-    "**/lib/**": true,
-    "**/.parcel-cache/**": true
+    "**/lib/**": false,
+    "**/.parcel-cache/**": false
   },
   "search.exclude": {
     "**/.git": true,
@@ -41,5 +41,8 @@
     "**/lib/**": true,
     "**/.parcel-cache/**": true
   },
-  "cSpell.words": ["Genshi"]
+  "cSpell.words": ["Genshi"],
+  "[typescript]": {
+    "editor.wordWrap": "off"
+  }
 }

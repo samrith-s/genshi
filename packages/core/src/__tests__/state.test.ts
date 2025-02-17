@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { StateManager } from "../StateManager";
-import { Store } from "../Store";
+import { StateManager } from "../managers/state-manager";
+import { Store } from "../store";
 
 describe("state", () => {
   it("should print state correctly", () => {

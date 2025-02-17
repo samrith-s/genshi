@@ -21,14 +21,21 @@ const reporters: InlineConfig["reporters"] = [
     },
   ]);
 
-export function vitestConfig() {
+export function vitestConfig(config?: InlineConfig) {
   return defineConfig({
     test: {
       reporters,
+      ...config,
       coverage: {
+        ...config?.coverage,
         provider: "v8",
         include: ["src/**"],
-        exclude: ["src/**/index.ts", "**/example.ts", "**/*.decl.ts"],
+        exclude: [
+          "src/**/index.ts",
+          "**/example.ts",
+          "**/*.decl.ts",
+          ...(config?.coverage?.exclude || []),
+        ],
         clean: true,
         reportsDirectory: ".test/coverage",
       },

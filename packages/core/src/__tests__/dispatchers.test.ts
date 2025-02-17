@@ -1,9 +1,9 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { Dispatcher } from "../Dispatchers/@BaseDispatcher";
-import { Action, ActionHandler } from "../Dispatchers/ActionDispatcher";
-import { Effect, EffectHandler } from "../Dispatchers/EffectDispatcher";
-import { Store } from "../Store";
+import { Dispatcher } from "../dispatchers/@base-dispatcher";
+import { Action, ActionHandler } from "../dispatchers/action-dispatcher";
+import { Effect, EffectHandler } from "../dispatchers/effect-dispatcher";
+import { Store } from "../store";
 
 describe("dispatchers", () => {
   /**

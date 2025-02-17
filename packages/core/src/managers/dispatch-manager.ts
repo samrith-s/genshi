@@ -2,10 +2,9 @@ import {
   Dispatch,
   Dispatcher,
   DispatchHandler,
-} from "./Dispatchers/@BaseDispatcher";
-import { ActionHandler } from "./Dispatchers/ActionDispatcher";
-import { EffectHandler } from "./Dispatchers/EffectDispatcher";
-import { HistoryManager } from "./HistoryManager";
+} from "../dispatchers/@base-dispatcher";
+
+import { MiddlewareManager } from "./middleware-manager";
 
 /**
  * The `DispatchManager` class manages the various dispatchers (Actions, Effects)
@@ -14,7 +13,7 @@ import { HistoryManager } from "./HistoryManager";
  * It is an abstract class as it has no merit on its own. It is meant to be
  * extended by the `Store` class.
  */
-export abstract class DispatchManager<State> extends HistoryManager<State> {
+export abstract class DispatchManager<State> extends MiddlewareManager<State> {
   /**
    * The `dispatch` method is used to dispatch an action or an effect.
    */
@@ -76,15 +75,9 @@ export abstract class DispatchManager<State> extends HistoryManager<State> {
 
     switch (type) {
       case Dispatcher.ACTION: {
-        /**
-         * We are typecasting the handler as an `ActionHandler` so that
-         * we get the correct type for the arguments it accepts.
-         */
-        const actionHandler = handler as ActionHandler<State, typeof payload>;
-
         this.setState(
-          actionHandler({
-            state: this.state,
+          this.applyActionMiddleware({
+            handler,
             payload,
           })
         );
@@ -95,16 +88,10 @@ export abstract class DispatchManager<State> extends HistoryManager<State> {
       }
 
       case Dispatcher.EFFECT: {
-        /**
-         * We are typecasting the handler as an `EffectHandler` so that
-         * we get the correct type for the arguments it accepts.
-         */
-        const effectHandler = handler as EffectHandler<State, typeof payload>;
-
         this.traceEnd(trace);
 
-        effectHandler({
-          state: this.state,
+        this.applyEffectMiddleware({
+          handler,
           payload,
           dispatch: (...argv) => {
             const d = argv[0];

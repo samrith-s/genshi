@@ -1,4 +1,4 @@
-import { BaseDispatcher, Dispatcher } from "./@BaseDispatcher";
+import { BaseDispatcher, Dispatcher } from "./@base-dispatcher";
 
 export type ActionHandler<State, Payload> = ({
   state,

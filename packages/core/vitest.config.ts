@@ -1,3 +1,7 @@
 import { vitestConfig } from "../../vitest.config";
 
-export default vitestConfig();
+export default vitestConfig({
+  coverage: {
+    exclude: ["src/config.ts"],
+  },
+});
