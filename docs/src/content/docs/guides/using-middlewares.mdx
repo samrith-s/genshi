@@ -55,7 +55,7 @@ To use Immer with Genshi, you need to pass the middleware to the `middlewares` o
 
 <Steps>
 
-1. First, install the middlewares package:
+1. First, install the middlewares package
 
    <Tabs syncKey="package-manager">
      <TabItem label="npm">
@@ -69,7 +69,7 @@ To use Immer with Genshi, you need to pass the middleware to the `middlewares` o
      </TabItem>
    </Tabs>
 
-2. Pass the Immer middleware to the store:
+2. Pass the Immer middleware to the store
 
    ```ts
    import { Store } from "@genshi/core";
@@ -83,6 +83,17 @@ To use Immer with Genshi, you need to pass the middleware to the `middlewares` o
        },
      },
    );
+   ```
+
+3. You can now update the state in a mutable way
+
+   ```diff lang="ts"
+   store.action("increment", (state) => {
+   -  return {
+   -    count: state.count + 1,
+   -  };
+   +  state.count += 1;
+   });
    ```
 
 </Steps>
