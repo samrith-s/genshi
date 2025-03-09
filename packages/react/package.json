@@ -7,13 +7,13 @@
   "homepage": "https://genshi.samrith.dev",
   "type": "module",
   "source": "src/index.ts",
-  "module": "lib/index.js",
-  "main": "lib/index.cjs",
-  "types": "lib/types/src/index.d.ts",
+  "module": "lib/react.js",
+  "main": "lib/react.cjs",
+  "types": "lib/types/index.d.ts",
   "exports": {
-    "types": "./lib/types/src/index.d.ts",
-    "import": "./lib/index.js",
-    "require": "./lib/index.cjs"
+    "types": "./lib/types/index.d.ts",
+    "import": "./lib/react.js",
+    "require": "./lib/react.cjs"
   },
   "repository": {
     "type": "git",
@@ -30,8 +30,7 @@
     "lint": "sh ../../scripts/shell/lint.sh .",
     "format": "sh ../../scripts/shell/format.sh .",
     "typecheck": "sh ../../scripts/shell/typecheck.sh .",
-    "test": "vitest --coverage",
-    "example": "parcel example/index.html"
+    "test": "vitest --coverage"
   },
   "files": [
     "README.md",
@@ -45,20 +44,14 @@
     "@genshi/core": "workspace:~"
   },
   "devDependencies": {
-    "@genshi/middlewares": "workspace:~",
     "@testing-library/dom": "10.4.0",
     "@testing-library/react": ">=16.1.0",
-    "@types/react": ">=18.3.10",
-    "@types/react-dom": "18.3.0",
+    "@types/react": "^19.0.0",
     "@vitest/coverage-v8": "1.6.0",
     "@vitest/ui": "1.6.0",
     "eslint-plugin-react-hooks": "5.0.0",
-    "immer": "10.1.1",
     "jsdom": "25.0.1",
-    "parcel": "2.12.0",
-    "react": ">=18.3.1",
-    "react-dom": ">=18.3.1",
-    "rollup-plugin-node-externals": "8.0.0",
+    "react": "18.3.1",
     "typescript": "5.4.5",
     "vite": "5.2.11",
     "vite-node": "1.6.0",
