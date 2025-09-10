@@ -69,7 +69,9 @@ export abstract class HandlerManager<
    *
    * It performs an intrinsic non-blocking check to see if the dispatcher is already registered.
    */
-  protected registerDispatcher(dispatcher: AnyDispatcher<Handler>) {
+  protected registerDispatcher<Dispatcher extends AnyDispatcher<Handler>>(
+    dispatcher: Dispatcher
+  ) {
     this.#exists(dispatcher);
     this.#dispatchers.add(`${dispatcher.type}-${dispatcher.displayName}`);
     return dispatcher;
