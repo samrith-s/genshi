@@ -1,6 +1,6 @@
 {
   "name": "@genshi/react",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A simple, composable and effective JavaScript state management library for React",
   "author": "Samrith Shankar <samrith.shankar@outlook.com>",
   "license": "MIT",
