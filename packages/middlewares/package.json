@@ -46,7 +46,7 @@
     "vitest": "1.6.0"
   },
   "peerDependencies": {
-    "@genshi/core": ">=1.1.0",
+    "@genshi/core": "workspace:*",
     "immer": ">=10.x"
   },
   "peerDependenciesMeta": {
