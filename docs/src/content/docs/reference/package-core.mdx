@@ -68,7 +68,7 @@ Working with TypeScript? Head over to the [TypeScript](/guides/typescript) secti
 :::
 
 ```ts title="Example"
-const increment = store.action("increment", (state, payload) => {
+const increment = store.action("increment", ({ state, payload }) => {
   return {
     count: state.count + payload,
   };
@@ -85,7 +85,7 @@ Working with TypeScript? Head over to the [TypeScript](/guides/typescript) secti
 :::
 
 ```ts title="Example"
-const log = store.effect("log", (state) => {
+const log = store.effect("log", ({ state }) => {
   console.log(state);
 });
 ```
@@ -110,7 +110,7 @@ store.dispatch(increment, 10);
 - Returns a listener with a `remove` method to unsubscribe
 
 ```ts title="Example"
-const listener = store.subscribe((state) => {
+const listener = store.subscribe(({ state }) => {
   console.log("Store changed:", state.count);
 });
 listener.remove();

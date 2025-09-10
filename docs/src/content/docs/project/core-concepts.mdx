@@ -51,7 +51,7 @@ Actions are pure functions, which means they do not have side-effects and always
 Here is an example of an action that increments the counter counter:
 
 ```ts
-const increment = store.action("increment", (state) => ({
+const increment = store.action("increment", ({ state }) => ({
   ...state,
   count: state.count + 1,
 }));
@@ -96,7 +96,7 @@ Here is an example of dispatching an action:
 
 ```ts
 const store = new Store(0);
-const increment = store.action("increment", (state) => state + 1);
+const increment = store.action("increment", ({ state }) => state + 1);
 store.dispatch(increment);
 ```
 
@@ -111,8 +111,8 @@ Payloads can be strictly typed in Genshi. Head over to the [TypeScript](/guides/
 Here is an example of an action that takes a payload:
 
 ```ts
-const setCount = store.action("setCount", (state, count) => ({
+const setCount = store.action("setCount", ({ state, payload }) => ({
   ...state,
-  count,
+  count: payload,
 }));
 ```

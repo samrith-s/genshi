@@ -28,7 +28,7 @@ First, let's create a store with an initial state.
 ```ts
 import { createStore } from "@genshi/react";
 
-const [store, useStore] = createStore({
+const [useStore, store] = createStore({
   count: 0,
 });
 ```
@@ -42,7 +42,7 @@ Now, we can define our actions and effects.
 The `action` method on the store instance is used to define an action. The action function takes the current state as an argument and returns the new state.
 
 ```ts
-const increment = store.action("increment", (state) => ({
+const increment = store.action("increment", ({ state }) => ({
   ...state,
   count: state.count + 1,
 }));
@@ -127,7 +127,7 @@ function Counter() {
 Here, we are using the `dispatch` method to dispatch the `add` action with a payload of `10`. We also need to define the `add` action by creating a new definition.
 
 ```ts
-const add = store.action("add", (state, payload) => ({
+const add = store.action("add", ({ state, payload }) => ({
   ...state,
   count: state.count + payload,
 }));

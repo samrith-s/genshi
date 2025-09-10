@@ -13,7 +13,7 @@ To understand how to create actions and effects, refer to the API documentation 
 ```ts title="Example"
 import { createStore } from "@genshi/react";
 
-export const [store, useStore] = createStore({
+export const [useStore, store] = createStore({
   count: 0,
 });
 ```
@@ -21,7 +21,7 @@ export const [store, useStore] = createStore({
 The `createStore` method also provides an optional second argument for configuration the name of the store. This is particularly useful for debugging purposes.
 
 ```ts title="Example"
-const [store, useStore] = createStore(0, "CounterStore");
+const [useStore, store] = createStore(0, "CounterStore");
 ```
 
 ### `createStore`
