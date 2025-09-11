@@ -48,7 +48,7 @@ Actions are the primary way to update your application state in Genshi. They are
 
 Actions are pure functions, which means they do not have side-effects and always return the same output for the same input and are to be treated as such.
 
-Here is an example of an action that increments the counter counter:
+Here is an example of an action that increments the counter:
 
 ```ts
 const increment = store.action("increment", ({ state }) => ({

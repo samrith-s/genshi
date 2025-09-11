@@ -96,7 +96,16 @@ function Counter() {
 
 A common use case is to pass a payload to an action or an effect. Genshi comes with first-class support for payloads.
 
-First, let's button and a handler to add `10` to the count in our component.
+First, lets add a new action to add `10` to the count.
+
+```ts
+const add = store.action("add", ({ state, payload }) => ({
+  ...state,
+  count: state.count + payload,
+}));
+```
+
+Then, we can dispatch this new action with the payload.
 
 ```diff lang="tsx" collapse={1-10, }
 function Counter() {
@@ -124,11 +133,4 @@ function Counter() {
 }
 ```
 
-Here, we are using the `dispatch` method to dispatch the `add` action with a payload of `10`. We also need to define the `add` action by creating a new definition.
-
-```ts
-const add = store.action("add", ({ state, payload }) => ({
-  ...state,
-  count: state.count + payload,
-}));
-```
+Here, we are using the `dispatch` method to dispatch the `add` action with a payload of `10`.
